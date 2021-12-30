@@ -10,9 +10,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Restore build
+      uses: actions/download-artifact@v2
+      with:
+        name: build
+        path: /tmp/build
+
     - name: Unpack build
       run: |
-        cat README.md
+        cd /tmp/build
+        ls -l
 
   on-failure:
     runs-on: ubuntu-latest
