@@ -22,6 +22,7 @@ jobs:
       run: |
         cd /tmp/build
         ls -l
+        cat README.md
 
   on-failure:
     runs-on: ubuntu-latest
