@@ -23,3 +23,11 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
 
+        mkdir /tmp/build
+        cp README.md /tmp/build
+
+    - name: Store build
+      uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: /tmp/build
