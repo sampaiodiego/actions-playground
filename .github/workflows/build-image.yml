@@ -8,22 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-
-    - name: Get GitHub Pages Data
-      uses: actions/github-script@v3
-      id: pages-data
-      with:
-        script: |
-          const result = await github.request('GET /repos/{owner}/{repo}/pages', {
-            owner: context.repo.owner,
-            repo: context.repo.repo
-          })
-          return result.data
-
-    - name: Checkout PR branch
-      uses: actions/checkout@v2
-      with:
-        ref: refs/heads/${{ fromJSON(steps.pages-data.outputs.result).source.branch }}
+    - uses: actions/checkout@v2
 
     - name: Download artifact
       uses: dawidd6/action-download-artifact@v2
