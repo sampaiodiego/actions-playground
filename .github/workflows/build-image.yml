@@ -11,8 +11,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Restore build
-      uses: actions/download-artifact@v2
+      uses: dawidd6/action-download-artifact@v2
       with:
+        workflow: playgound.yml
         name: build
         path: /tmp/build
 
