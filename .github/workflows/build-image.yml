@@ -1,0 +1,23 @@
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Unpack build
+      run: |
+        cat README.md
+
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+    - name: Unpack build
+      run: |
+        echo "did not work"
