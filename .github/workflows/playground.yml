@@ -10,6 +10,36 @@ on:
       - master
 
 jobs:
+  docker-tags:
+    runs-on: ubuntu-latest
+    outputs:
+      docker-tag: ${{ steps.step1.outputs.docker-tag }}
+      release: ${{ steps.step1.outputs.release }}
+      latest-release: ${{ steps.step1.outputs.latest-release }}
+    steps:
+      - id: step1
+        run: |
+          DOCKER_TAG=$GITHUB_REF_NAME
+
+          if echo "$GITHUB_REF_NAME" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' ; then
+            RELEASE="latest"
+          elif echo "$GITHUB_REF_NAME" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+-rc\.[0-9]+$' ; then
+            RELEASE="release-candidate"
+          fi
+
+          LATEST_RELEASE="$(
+            git -c 'versionsort.suffix=-' ls-remote -t --exit-code --refs --sort=-v:refname "https://github.com/$GITHUB_REPOSITORY" '*' |
+              sed -En '1!q;s/^[[:xdigit:]]+[[:space:]]+refs\/tags\/(.+)/\1/gp'
+          )"
+
+          echo "DOCKER_TAG: $DOCKER_TAG"
+          echo "RELEASE: $RELEASE"
+          echo "LATEST_RELEASE: $LATEST_RELEASE"
+
+          echo "::set-output name=docker-tag::${DOCKER_TAG}"
+          echo "::set-output name=release::${RELEASE}"
+          echo "::set-output name=latest-release::${LATEST_RELEASE}"
+
   build:
 
     runs-on: ubuntu-latest
@@ -25,7 +55,7 @@ jobs:
 
   image-build:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build, docker-tags]
 
     steps:
     - uses: actions/checkout@v2
@@ -42,6 +72,10 @@ jobs:
 
     - name: Build Docker image for PRs
       run: |
+        echo "WTF1 ${{needs.docker-tags.outputs.docker-tag}}"
+        echo "WTF2 ${{needs.docker-tags.outputs.release}}"
+        echo "WTF3 ${{needs.docker-tags.outputs.latest-release}}"
+
         LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
         IMAGE_NAME="actions-playground"
 
