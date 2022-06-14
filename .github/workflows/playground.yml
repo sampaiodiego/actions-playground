@@ -94,11 +94,13 @@ jobs:
 
           echo "Build official Docker image ${IMAGE_NAME}"
 
-          docker build --help
+          docker buildx build --help
 
-          docker build -t $IMAGE_NAME --cache-to /tmp/docker-cache .
+          docker buildx build -t $IMAGE_NAME --cache-to /tmp/docker-cache .
 
           docker images
+
+          ls -la /tmp/docker-cache
 
   image-usage:
     runs-on: ubuntu-latest
