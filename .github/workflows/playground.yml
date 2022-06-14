@@ -58,7 +58,7 @@ jobs:
     needs: [build, docker-tags]
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       -
         name: Login to GitHub Container Registry
@@ -75,21 +75,21 @@ jobs:
     #     username: ${{ secrets.CR_USER }}
     #     password: ${{ secrets.CR_PAT }}
 
-    - name: Unpack build
-      run: |
+      - name: Unpack build
+        run: |
 
-    - name: Build Docker image for PRs
-      run: |
-        echo "WTF1 ${{needs.docker-tags.outputs.docker-tag}}"
-        echo "WTF2 ${{needs.docker-tags.outputs.release}}"
-        echo "WTF3 ${{needs.docker-tags.outputs.latest-release}}"
+      - name: Build Docker image for PRs
+        run: |
+          echo "WTF1 ${{needs.docker-tags.outputs.docker-tag}}"
+          echo "WTF2 ${{needs.docker-tags.outputs.release}}"
+          echo "WTF3 ${{needs.docker-tags.outputs.latest-release}}"
 
-        LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
-        IMAGE_NAME="actions-playground"
+          LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
+          IMAGE_NAME="actions-playground"
 
-        IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/${IMAGE_NAME}:pr-${{ github.event.number }}"
+          IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/${IMAGE_NAME}:pr-${{ github.event.number }}"
 
-        echo "Build official Docker image ${IMAGE_NAME}"
+          echo "Build official Docker image ${IMAGE_NAME}"
 
-        docker build -t $IMAGE_NAME .
-        docker push $IMAGE_NAME
+          docker build -t $IMAGE_NAME .
+          docker push $IMAGE_NAME
