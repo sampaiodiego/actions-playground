@@ -75,15 +75,6 @@ jobs:
       #     username: ${{ secrets.CR_USER }}
       #     password: ${{ secrets.CR_PAT }}
 
-      - name: Log in to registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-
-      -
-        uses: docker/setup-buildx-action@v2
-        id: buildx
-        with:
-          install: true
-
       - name: Unpack build
         run: |
 
@@ -103,22 +94,41 @@ jobs:
 
           # mkdir /tmp/docker-cache
 
-          docker build -t $IMAGE_NAME --cache-to type=local,dest=/tmp/.buildx-cache-new .
+          docker build -t $IMAGE_NAME .
 
           docker images
 
-          ls -la /tmp/.buildx-cache-new
+          docker save "$IMAGE_NAME" > /tmp/docker-cache/docker-image.tar
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: docker-artifact
+          path: /tmp/docker-cache
 
   image-usage:
     runs-on: ubuntu-latest
     needs: [image-build]
     steps:
+      - name: Download Docker Image (Artifact)
+        uses: actions/download-artifact@v2
+        with:
+          name: docker-artifact
+          path: /tmp/docker-cache
+
+      - name: Run test in Docker
+        run: |
+          cd /tmp/docker-cache
+          docker load < docker-image.tar
+
       - name: Use image
         run: |
           LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
           IMAGE_NAME="actions-playground"
 
           IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/${IMAGE_NAME}:pr-${{ github.event.number }}"
+
+          cd /tmp/docker-cache
+          docker load < docker-image.tar
 
           docker images
 
