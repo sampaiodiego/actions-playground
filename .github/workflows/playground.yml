@@ -96,11 +96,12 @@ jobs:
           LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
           IMAGE_NAME="actions-playground"
 
-          IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/${IMAGE_NAME}:pr-2${{ github.event.number }}"
+          FULL_IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/${IMAGE_NAME}:pr-2${{ github.event.number }}"
+          IMAGE_NAME="${IMAGE_NAME}:pr-2${{ github.event.number }}"
 
           echo "Build official Docker image ${IMAGE_NAME}"
 
-          mkdir /tmp/docker-cache
+          # mkdir /tmp/docker-cache
 
           docker build -t $IMAGE_NAME --cache-to /tmp/docker-cache .
 
