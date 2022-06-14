@@ -94,7 +94,9 @@ jobs:
 
           echo "Build official Docker image ${IMAGE_NAME}"
 
-          docker build -t $IMAGE_NAME .
+          docker build --help
+
+          docker build -t $IMAGE_NAME --cache-to /tmp/docker-cache .
 
           docker images
 
