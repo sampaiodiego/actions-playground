@@ -128,10 +128,7 @@ jobs:
           LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
           IMAGE_NAME="actions-playground"
 
-          IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/${IMAGE_NAME}:pr-${{ github.event.number }}"
-
-          cd /tmp/docker-cache
-          docker load < docker-image.tar
+          IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/${IMAGE_NAME}:pr-2${{ github.event.number }}"
 
           docker images
 
