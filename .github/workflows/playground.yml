@@ -109,4 +109,6 @@ jobs:
 
           docker images
 
-          docker run -it $IMAGE_NAME
+          echo "IMAGE_NAME: ${IMAGE_NAME}"
+
+          docker run $IMAGE_NAME
