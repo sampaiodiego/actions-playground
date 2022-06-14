@@ -98,7 +98,10 @@ jobs:
 
           docker images
 
+          mkdir /tmp/docker-cache
           docker save "$IMAGE_NAME" > /tmp/docker-cache/docker-image.tar
+
+          ls -l /tmp/docker-cache
 
       - uses: actions/upload-artifact@v2
         with:
