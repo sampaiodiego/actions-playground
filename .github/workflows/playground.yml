@@ -107,7 +107,7 @@ jobs:
 
           docker images
 
-          ls -la /tmp/docker-cache
+          ls -la /tmp/.buildx-cache-new
 
   image-usage:
     runs-on: ubuntu-latest
