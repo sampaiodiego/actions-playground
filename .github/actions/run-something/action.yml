@@ -12,7 +12,8 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Github Info
+    - shell: bash
+      name: Github Info
       run: |
         echo "GITHUB_ACTION: $GITHUB_ACTION"
         echo "GITHUB_ACTOR: $GITHUB_ACTOR"
@@ -22,10 +23,12 @@ runs:
         echo "github.event_name: ${{ github.event_name }}"
         cat $GITHUB_EVENT_PATH
 
-    - run: |
+    - shell: bash
+      run: |
       echo "Hello World"
 
-    - run: |
+    - shell: bash
+      run: |
       LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
 
       IMAGE_TAG="pr-${{ github.event.number }}"

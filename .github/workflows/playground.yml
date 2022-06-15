@@ -126,6 +126,9 @@ jobs:
           docker load < docker-image.tar
 
       - uses: ./.github/actions/run-something
+        with:
+          image: 'some image'
+          site-url: 'idk site url'
 
       - name: Use image
         run: |
