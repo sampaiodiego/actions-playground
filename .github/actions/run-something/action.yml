@@ -51,6 +51,7 @@ runs:
       shell: bash
 
     - shell: bash
+      if: ${{ inputs.publish }}
       run: |
         echo "GOING TO PUSH THOSE IMAGES >${{ inputs.publish }}<"
 
