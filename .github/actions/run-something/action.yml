@@ -50,5 +50,10 @@ runs:
 
     - shell: bash
       run: |
-        echo "GOING TO PUSH THOSE IMAGES >{{ inputs.publish }}<"
+        echo "GOING TO PUSH THOSE IMAGES >${{ inputs.publish }}<"
+
+    - shell: bash
+      if: github.event.pull_request.head.repo.full_name == github.repository
+      run: |
+        echo "Can make IF here as well"
 
