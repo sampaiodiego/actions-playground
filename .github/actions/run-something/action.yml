@@ -24,6 +24,8 @@ runs:
         echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
         echo "github.event_name: ${{ github.event_name }}"
         cat $GITHUB_EVENT_PATH
+        echo "full_name: github.event.pull_request.head.repo.full_name"
+        echo "github.repository: ${{ github.repository }}"
 
     - shell: bash
       run: |
