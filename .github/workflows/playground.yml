@@ -135,6 +135,8 @@ jobs:
           cd /tmp/docker-cache
           docker load < docker-image.tar
 
+          echo "ok" > /tmp/feito
+
       - uses: ./.github/actions/run-something
         with:
           image: 'some image'

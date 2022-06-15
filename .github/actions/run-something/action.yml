@@ -27,6 +27,10 @@ runs:
       run: |
         echo "Hello World"
 
+        ls -l /tmp/docker-cache
+
+        cat /tmp/feito
+
     - run: |
         LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
 
