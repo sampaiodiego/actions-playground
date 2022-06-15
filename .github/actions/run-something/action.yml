@@ -35,7 +35,8 @@ runs:
 
         cat /tmp/feito
 
-    - run: |
+    - id: build-image
+      run: |
         LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
 
         IMAGE_TAG="pr-${{ github.event.number }}"
@@ -44,6 +45,8 @@ runs:
         IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/rocket.chat:${IMAGE_TAG}"
 
         echo "IMAGE_NAME: ${IMAGE_NAME}"
+
+        echo "::set-output name=image-name::${IMAGE_NAME}"
 
         sleep 10
 
@@ -59,4 +62,6 @@ runs:
       if: github.event.pull_request.head.repo.full_name == github.repository
       run: |
         echo "Can make IF here as well"
+
+        echo "Image name is: ${{ steps.build-image.outputs.image-name }}"
 
