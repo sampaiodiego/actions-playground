@@ -10,19 +10,19 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Download artifact
-      uses: dawidd6/action-download-artifact@v2
-      with:
-        workflow: ${{ github.event.workflow_run.name }}
-        run_id: ${{ github.event.workflow_run.id }}
-        name: build
-        path: /tmp/build
+    # - name: Download artifact
+    #   uses: dawidd6/action-download-artifact@v2
+    #   with:
+    #     workflow: ${{ github.event.workflow_run.name }}
+    #     run_id: ${{ github.event.workflow_run.id }}
+    #     name: build
+    #     path: /tmp/build
 
-    - name: Unpack build
-      run: |
-        cd /tmp/build
-        ls -l
-        cat README.md
+    # - name: Unpack build
+    #   run: |
+    #     cd /tmp/build
+    #     ls -l
+    #     cat README.md
 
   on-failure:
     runs-on: ubuntu-latest
