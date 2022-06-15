@@ -123,6 +123,8 @@ jobs:
           cd /tmp/docker-cache
           docker load < docker-image.tar
 
+      - uses: ./.github/actions/run-something.yml
+
       - name: Use image
         run: |
           LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
@@ -134,4 +136,4 @@ jobs:
 
           echo "IMAGE_NAME: ${IMAGE_NAME}"
 
-          docker run $IMAGE_NAME
+          # docker run $IMAGE_NAME

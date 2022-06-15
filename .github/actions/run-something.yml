@@ -1,0 +1,30 @@
+name: 'Run something'
+description: 'Try to run something'
+
+inputs:
+  image:
+    required: true
+    type: string
+  site-url:
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+      echo "Hello World"
+
+    - run: |
+      LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
+
+      IMAGE_TAG="pr-${{ github.event.number }}"
+
+      # TODO this needs to be different on develop and on release
+      IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/rocket.chat:${IMAGE_TAG}"
+
+      echo "IMAGE_NAME: ${IMAGE_NAME}"
+
+      sleep 10
+
+      echo "done"
