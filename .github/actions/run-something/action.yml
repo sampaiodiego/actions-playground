@@ -8,6 +8,8 @@ inputs:
   site-url:
     required: true
     type: string
+  publish:
+    required: false
 
 runs:
   using: "composite"
@@ -45,4 +47,9 @@ runs:
 
         echo "done"
       shell: bash
+
+    - shell: bash
+      if: {{ inputs.publish }}
+      run: |
+        echo "GOING TO PUSH THOSE IMAGES"
 
