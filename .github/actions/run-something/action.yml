@@ -25,19 +25,20 @@ runs:
 
     - shell: bash
       run: |
-      echo "Hello World"
+        echo "Hello World"
 
-    - shell: bash
-      run: |
-      LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
+    - run: |
+        LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
 
-      IMAGE_TAG="pr-${{ github.event.number }}"
+        IMAGE_TAG="pr-${{ github.event.number }}"
 
-      # TODO this needs to be different on develop and on release
-      IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/rocket.chat:${IMAGE_TAG}"
+        # TODO this needs to be different on develop and on release
+        IMAGE_NAME="ghcr.io/${LOWERCASE_REPOSITORY}/rocket.chat:${IMAGE_TAG}"
 
-      echo "IMAGE_NAME: ${IMAGE_NAME}"
+        echo "IMAGE_NAME: ${IMAGE_NAME}"
 
-      sleep 10
+        sleep 10
 
-      echo "done"
+        echo "done"
+      shell: bash
+
