@@ -123,7 +123,7 @@ jobs:
           cd /tmp/docker-cache
           docker load < docker-image.tar
 
-      - uses: ./.github/actions/run-something.yml
+      - uses: ./.github/actions/run-something
 
       - name: Use image
         run: |
