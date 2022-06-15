@@ -141,7 +141,7 @@ jobs:
         with:
           image: 'some image'
           site-url: 'idk site url'
-          publish: github.event.pull_request.head.repo.full_name == github.repository
+          publish: ${{ github.event.pull_request.head.repo.full_name }} == ${{ github.repository }}
 
       - name: Use image
         run: |
