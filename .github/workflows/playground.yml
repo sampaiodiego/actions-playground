@@ -142,6 +142,8 @@ jobs:
           image: 'some image'
           site-url: 'idk site url'
           publish: ${{ github.event.pull_request.head.repo.full_name }} == ${{ github.repository }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Use image
         run: |
