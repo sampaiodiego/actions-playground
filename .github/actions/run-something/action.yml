@@ -71,7 +71,7 @@ runs:
         echo "GOING TO PUSH THOSE IMAGES >${{ inputs.publish }}<"
 
     - shell: bash
-      if: github.event.pull_request.head.repo.full_name == github.repository
+      if: github.event.pull_request.head.repo.full_name == github.repository && (github.event_name == 'release' || github.ref == 'refs/heads/develop')
       run: |
         echo "Can make IF here as well"
 
