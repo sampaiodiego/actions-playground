@@ -23,7 +23,6 @@ env:
 jobs:
   yarn-build:
     runs-on: ubuntu-20.04
-    needs: [lint-and-ts]
     steps:
       - uses: actions/checkout@v3
 
@@ -68,7 +67,7 @@ jobs:
 
   unit-test:
     runs-on: ubuntu-20.04
-    needs: [lint-and-ts]
+    needs: [yarn-build]
     steps:
       - uses: actions/checkout@v3
 
