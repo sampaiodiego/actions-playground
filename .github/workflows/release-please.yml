@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - develop
 
 permissions:
   contents: write
@@ -17,3 +17,4 @@ jobs:
         with:
           release-type: node
           package-name: actions-playground-name
+          default-branch: master
