@@ -288,6 +288,13 @@ __metadata:
   resolution: "@diegosampaio/next-app@workspace:apps/next-app"
   dependencies:
     "@diegosampaio/backend": "workspace:^"
+    "@diegosampaio/theme": "workspace:^"
+  languageName: unknown
+  linkType: soft
+
+"@diegosampaio/theme@workspace:^, @diegosampaio/theme@workspace:apps/theme":
+  version: 0.0.0-use.local
+  resolution: "@diegosampaio/theme@workspace:apps/theme"
   languageName: unknown
   linkType: soft
 

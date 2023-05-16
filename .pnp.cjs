@@ -22,6 +22,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "@diegosampaio/next-app",\
         "reference": "workspace:apps/next-app"\
+      },\
+      {\
+        "name": "@diegosampaio/theme",\
+        "reference": "workspace:apps/theme"\
       }\
     ],\
     "enableTopLevelFallback": true,\
@@ -29,6 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "fallbackExclusionList": [\
       ["@diegosampaio/backend", ["workspace:apps/backend"]],\
       ["@diegosampaio/next-app", ["workspace:apps/next-app"]],\
+      ["@diegosampaio/theme", ["workspace:apps/theme"]],\
       ["actions-playground", ["workspace:."]]\
     ],\
     "fallbackPool": [\
@@ -350,7 +355,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./apps/next-app/",\
           "packageDependencies": [\
             ["@diegosampaio/next-app", "workspace:apps/next-app"],\
-            ["@diegosampaio/backend", "workspace:apps/backend"]\
+            ["@diegosampaio/backend", "workspace:apps/backend"],\
+            ["@diegosampaio/theme", "workspace:apps/theme"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@diegosampaio/theme", [\
+        ["workspace:apps/theme", {\
+          "packageLocation": "./apps/theme/",\
+          "packageDependencies": [\
+            ["@diegosampaio/theme", "workspace:apps/theme"]\
           ],\
           "linkType": "SOFT"\
         }]\
