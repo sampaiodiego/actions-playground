@@ -1,5 +1,16 @@
 # @chinello-playground/backend
 
+## 2.1.0
+
+### Minor Changes
+
+- 64669de: minor nro 1 let's see
+- ef600d6: this is minor nro 2
+
+### Patch Changes
+
+- 86cc886: how this patch will impact the version?
+
 ## 1.2.0
 
 ### Minor Changes
