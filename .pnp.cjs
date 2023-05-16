@@ -16,19 +16,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:."\
       },\
       {\
-        "name": "@chinello-playground/backend",\
+        "name": "@diegosampaio/backend",\
         "reference": "workspace:apps/backend"\
       },\
       {\
-        "name": "@chinello-playground/next-app",\
+        "name": "@diegosampaio/next-app",\
         "reference": "workspace:apps/next-app"\
       }\
     ],\
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
-      ["@chinello-playground/backend", ["workspace:apps/backend"]],\
-      ["@chinello-playground/next-app", ["workspace:apps/next-app"]],\
+      ["@diegosampaio/backend", ["workspace:apps/backend"]],\
+      ["@diegosampaio/next-app", ["workspace:apps/next-app"]],\
       ["actions-playground", ["workspace:."]]\
     ],\
     "fallbackPool": [\
@@ -336,21 +336,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@chinello-playground/backend", [\
+      ["@diegosampaio/backend", [\
         ["workspace:apps/backend", {\
           "packageLocation": "./apps/backend/",\
           "packageDependencies": [\
-            ["@chinello-playground/backend", "workspace:apps/backend"]\
+            ["@diegosampaio/backend", "workspace:apps/backend"]\
           ],\
           "linkType": "SOFT"\
         }]\
       ]],\
-      ["@chinello-playground/next-app", [\
+      ["@diegosampaio/next-app", [\
         ["workspace:apps/next-app", {\
           "packageLocation": "./apps/next-app/",\
           "packageDependencies": [\
-            ["@chinello-playground/next-app", "workspace:apps/next-app"],\
-            ["@chinello-playground/backend", "workspace:apps/backend"]\
+            ["@diegosampaio/next-app", "workspace:apps/next-app"],\
+            ["@diegosampaio/backend", "workspace:apps/backend"]\
           ],\
           "linkType": "SOFT"\
         }]\

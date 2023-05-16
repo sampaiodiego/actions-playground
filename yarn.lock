@@ -277,17 +277,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chinello-playground/backend@workspace:^, @chinello-playground/backend@workspace:apps/backend":
+"@diegosampaio/backend@workspace:^, @diegosampaio/backend@workspace:apps/backend":
   version: 0.0.0-use.local
-  resolution: "@chinello-playground/backend@workspace:apps/backend"
+  resolution: "@diegosampaio/backend@workspace:apps/backend"
   languageName: unknown
   linkType: soft
 
-"@chinello-playground/next-app@workspace:apps/next-app":
+"@diegosampaio/next-app@workspace:apps/next-app":
   version: 0.0.0-use.local
-  resolution: "@chinello-playground/next-app@workspace:apps/next-app"
+  resolution: "@diegosampaio/next-app@workspace:apps/next-app"
   dependencies:
-    "@chinello-playground/backend": "workspace:^"
+    "@diegosampaio/backend": "workspace:^"
   languageName: unknown
   linkType: soft
 

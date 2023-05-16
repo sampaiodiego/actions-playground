@@ -1,8 +1,7 @@
 {
-	"name": "@chinello-playground/next-app",
+	"name": "@diegosampaio/next-app",
 	"version": "1.0.2",
-	"private": true,
 	"dependencies": {
-		"@chinello-playground/backend": "workspace:^"
+		"@diegosampaio/backend": "workspace:^"
 	}
 }
