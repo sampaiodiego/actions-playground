@@ -1,5 +1,11 @@
 # @chinello-playground/backend
 
+## 1.1.0
+
+### Minor Changes
+
+- 76fe860: backend minor
+
 ## 1.0.1
 
 ### Patch Changes
