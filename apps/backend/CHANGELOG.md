@@ -1,5 +1,15 @@
 # @chinello-playground/backend
 
+## 1.2.0
+
+### Minor Changes
+
+- 64659d4: add index.js to feature project
+
+### Patch Changes
+
+- 83384df: fix nothing because
+
 ## 1.1.0
 
 ### Minor Changes
