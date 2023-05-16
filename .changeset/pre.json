@@ -1,0 +1,13 @@
+{
+  "mode": "pre",
+  "tag": "rc",
+  "initialVersions": {
+    "@diegosampaio/backend": "1.2.0",
+    "@diegosampaio/next-app": "2.0.0"
+  },
+  "changesets": [
+    "clean-grapes-switch",
+    "rich-lies-perform",
+    "rude-jobs-decide"
+  ]
+}
