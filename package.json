@@ -3,6 +3,9 @@
   "version": "3.0.1",
   "description": "new commit",
   "main": "index.js",
+  "scripts": {
+    "release": "echo 'doing a release'"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sampaiodiego/actions-playground.git"
