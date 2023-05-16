@@ -4,7 +4,7 @@
   "description": "new commit",
   "main": "index.js",
   "scripts": {
-    "release": "echo 'doing a release'"
+    "release": "echo 'doing a release' && changeset publish"
   },
   "repository": {
     "type": "git",
