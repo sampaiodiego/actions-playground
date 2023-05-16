@@ -12,5 +12,8 @@
   "private": true,
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "dependencies": {
+    "@changesets/cli": "^2.26.1"
+  }
 }
