@@ -2,7 +2,9 @@
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [],
+  "fixed": [
+    ["@diegosampaio/backend", "@diegosampaio/next-app"]
+  ],
   "linked": [],
   "access": "public",
   "baseBranch": "develop",
