@@ -1,6 +1,7 @@
 {
 	"name": "@diegosampaio/next-app",
 	"version": "2.0.0",
+  "access": "public",
 	"dependencies": {
 		"@diegosampaio/backend": "workspace:^"
 	}
