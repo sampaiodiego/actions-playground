@@ -1,26 +1,29 @@
-name: Mixed inputs
+name: New release
 
 on:
   workflow_dispatch:
     inputs:
       name:
         type: choice
-        description: Who to greet
-        options:
-        - monalisa
-        - cschleiden
-      message:
+        description: Release type
+        default: minor
         required: true
-      use-emoji:
-        type: boolean
-        description: Include 🎉🤣 emojis
-      environment:
-        type: environment
+        options:
+        - major
+        - minor
+        - patch
+      base-ref:
+        description: Base version
+        default: master
+        required: true
 
 jobs:
-  greet:
+  new-release:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Send greeting
-      run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.inputs.base-ref }}
+
+    - run: cat package.json
