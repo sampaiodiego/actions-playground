@@ -1,5 +1,11 @@
 # @chinello-playground/backend
 
+## 2.2.0-beta.1
+
+### Patch Changes
+
+- dd483e7: new patch during beta
+
 ## 2.2.0-beta.0
 
 ## 2.1.0
