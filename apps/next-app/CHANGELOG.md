@@ -1,5 +1,16 @@
 # @chinello-playground/next-app
 
+## 2.2.0-beta.2
+
+### Minor Changes
+
+- adf10b8: minor after beta
+
+### Patch Changes
+
+- @diegosampaio/backend@2.2.0-beta.2
+- @diegosampaio/theme@2.2.0-beta.2
+
 ## 2.2.0-beta.1
 
 ### Patch Changes
