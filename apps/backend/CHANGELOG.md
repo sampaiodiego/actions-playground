@@ -1,5 +1,7 @@
 # @chinello-playground/backend
 
+## 2.2.0-beta.0
+
 ## 2.1.0
 
 ### Minor Changes

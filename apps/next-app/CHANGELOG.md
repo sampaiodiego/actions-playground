@@ -1,5 +1,16 @@
 # @chinello-playground/next-app
 
+## 2.2.0-beta.0
+
+### Minor Changes
+
+- dc9d614: add comment to show off
+
+### Patch Changes
+
+- @diegosampaio/backend@2.2.0-beta.0
+- @diegosampaio/theme@2.2.0-beta.0
+
 ## 2.1.0
 
 ### Patch Changes
