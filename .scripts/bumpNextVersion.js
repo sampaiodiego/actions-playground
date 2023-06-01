@@ -28,8 +28,6 @@ const setupUser = async () => {
 
   const newBranch = `release-${newVersion.split('-')[0]}`;
 
-	console.log('newBranch ->', newBranch);
-
   await exec("git", ["checkout", "-b", newBranch]);
   await exec("git", ['add', '.']);
   await exec("git", ["commit", "-m", newVersion]);

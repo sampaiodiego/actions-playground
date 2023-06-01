@@ -38,6 +38,10 @@ jobs:
 
     # - run: houston create-branch -t ${{ github.event.inputs.name }} -b ${{ github.event.inputs.base-ref }}
 
+    - name: Authenticate with private NPM package
+      if: ${{ github.event.inputs.name == 'next' }}
+      run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
     - name: Create Pull Request if next
       if: ${{ github.event.inputs.name == 'next' }}
       env:
