@@ -34,8 +34,6 @@ jobs:
 
     - run: cat package.json
 
-    - run: npm install
-
     # - run: npm i -g @rocket.chat/houston@next
 
     # - run: houston create-branch -t ${{ github.event.inputs.name }} -b ${{ github.event.inputs.base-ref }}
