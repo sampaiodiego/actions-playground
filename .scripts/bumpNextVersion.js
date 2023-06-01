@@ -1,7 +1,22 @@
 const path = require('path');
 const { exec } = require('@actions/exec');
 
+export const setupUser = async () => {
+  await exec("git", [
+    "config",
+    "user.name",
+    `"github-actions[bot]"`,
+  ]);
+  await exec("git", [
+    "config",
+    "user.email",
+    `"github-actions[bot]@users.noreply.github.com"`,
+  ]);
+};
+
 (async () => {
+  await setupUser();
+
   // start release candidate
 	await exec('yarn', ['changeset', 'pre', 'enter', 'rc']);
 
