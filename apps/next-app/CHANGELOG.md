@@ -1,5 +1,19 @@
 # @chinello-playground/next-app
 
+## 2.2.0
+
+### Minor Changes
+
+- adf10b8: minor after beta
+- dc9d614: add comment to show off
+
+### Patch Changes
+
+- e492436: patchzin
+- Updated dependencies [dd483e7]
+  - @diegosampaio/backend@2.2.0
+  - @diegosampaio/theme@2.2.0
+
 ## 2.2.0-beta.2
 
 ### Minor Changes
