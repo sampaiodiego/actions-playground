@@ -23,16 +23,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
       # with:
       #   ref: ${{ github.event.inputs.base-ref }}
 
     # - run: yarn install
 
+    - run: npm i -g @rocket.chat/houston@next
+
+    - run: houston create-branch -t ${{ github.event.inputs.name }} -b ${{ github.event.inputs.base-ref }}
+
     - run: |
-        npm i -g @rocket.chat/houston@next
-
-        houston create-branch -t ${{ github.event.inputs.name }} -b ${{ github.event.inputs.base-ref }}
-
         git status
 
         git branch
