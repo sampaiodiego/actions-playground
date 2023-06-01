@@ -29,14 +29,14 @@ jobs:
     # - run: yarn install
 
     - run: |
-      npm i -g @rocket.chat/houston@next
+        npm i -g @rocket.chat/houston@next
 
-      houston create-branch -t ${{ github.event.inputs.name }} -b ${{ github.event.inputs.base-ref }}
+        houston create-branch -t ${{ github.event.inputs.name }} -b ${{ github.event.inputs.base-ref }}
 
-      git status
+        git status
 
-      git branch
+        git branch
 
-      # git push --set-upstream origin ${{ github.event.inputs.name }}
+        # git push --set-upstream origin ${{ github.event.inputs.name }}
 
-      git push --no-verify
+        git push --no-verify
