@@ -39,6 +39,4 @@ jobs:
 
         git branch
 
-        # git push --set-upstream origin ${{ github.event.inputs.name }}
-
-        git push --no-verify
+        git push --set-upstream origin release-3.1.0
