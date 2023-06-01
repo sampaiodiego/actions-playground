@@ -1,7 +1,7 @@
 const path = require('path');
 const { exec } = require('@actions/exec');
 
-export const setupUser = async () => {
+const setupUser = async () => {
   await exec("git", [
     "config",
     "user.name",
