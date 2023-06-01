@@ -43,9 +43,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@actions/exec", "npm:1.1.1"],\
             ["@changesets/cli", "npm:2.26.1"]\
           ],\
           "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@actions/exec", [\
+        ["npm:1.1.1", {\
+          "packageLocation": "./.yarn/cache/@actions-exec-npm-1.1.1-90973d2f96-d976e66dd5.zip/node_modules/@actions/exec/",\
+          "packageDependencies": [\
+            ["@actions/exec", "npm:1.1.1"],\
+            ["@actions/io", "npm:1.1.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@actions/io", [\
+        ["npm:1.1.3", {\
+          "packageLocation": "./.yarn/cache/@actions-io-npm-1.1.3-82d1cf012b-42841ac2b8.zip/node_modules/@actions/io/",\
+          "packageDependencies": [\
+            ["@actions/io", "npm:1.1.3"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@babel/code-frame", [\
@@ -480,6 +500,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["actions-playground", "workspace:."],\
+            ["@actions/exec", "npm:1.1.1"],\
             ["@changesets/cli", "npm:2.26.1"]\
           ],\
           "linkType": "SOFT"\

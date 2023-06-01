@@ -1,4 +1,4 @@
-name: New release
+name: Start new release
 
 on:
   workflow_dispatch:
@@ -6,16 +6,15 @@ on:
       name:
         type: choice
         description: Release type
-        default: minor
+        default: next
         required: true
         options:
-        - major
-        - minor
+        - next
         - patch
       base-ref:
         description: Base version
         default: master
-        required: true
+        required: false
 
 jobs:
   new-release:
@@ -28,15 +27,13 @@ jobs:
       # with:
       #   ref: ${{ github.event.inputs.base-ref }}
 
-    # - run: yarn install
+    - run: yarn install
 
     - run: npm i -g @rocket.chat/houston@next
 
     - run: houston create-branch -t ${{ github.event.inputs.name }} -b ${{ github.event.inputs.base-ref }}
 
-    - run: |
-        git status
-
-        git branch
-
-        git push --set-upstream origin release-3.0.1
+    - name: Create Pull Request if next
+      if: ${{ github.event.inputs.name == 'next' }}
+      run: |
+        node .scripts/bumpNextVersion.js
