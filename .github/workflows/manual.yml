@@ -43,4 +43,4 @@ jobs:
     - name: Create Pull Request if next
       if: ${{ github.event.inputs.name == 'next' }}
       run: |
-        node .scripts/bumpNextVersion.js
+        yarn node .scripts/bumpNextVersion.js
