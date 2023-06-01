@@ -27,7 +27,7 @@ jobs:
       # with:
       #   ref: ${{ github.event.inputs.base-ref }}
 
-    - run: yarn install
+    - run: npm install
 
     # - run: npm i -g @rocket.chat/houston@next
 
