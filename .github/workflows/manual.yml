@@ -23,7 +23,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.inputs.base-ref }}
+      # with:
+      #   ref: ${{ github.event.inputs.base-ref }}
 
-    - run: cat package.json
+    # - run: yarn install
+
+    - run: |
+      npm i -g @rocket.chat/houston@next
+
+      houston create-branch -t ${{ github.event.inputs.name }} -b ${{ github.event.inputs.base-ref }}
+
+      git status
+
+      git branch
+
+      # git push --set-upstream origin ${{ github.event.inputs.name }}
+
+      git push --no-verify
