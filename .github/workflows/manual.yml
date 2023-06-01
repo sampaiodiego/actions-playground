@@ -32,7 +32,7 @@ jobs:
       with:
         node-version: 16
 
-    - run: cat package.json
+    - run: yarn install
 
     # - run: npm i -g @rocket.chat/houston@next
 
