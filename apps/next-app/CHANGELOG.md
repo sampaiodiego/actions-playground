@@ -1,5 +1,13 @@
 # @chinello-playground/next-app
 
+## 2.2.1-rc.0
+
+### Patch Changes
+
+- Updated dependencies [a9bdc31]
+  - @diegosampaio/backend@2.2.1-rc.0
+  - @diegosampaio/theme@2.2.1-rc.0
+
 ## 2.2.0
 
 ### Minor Changes

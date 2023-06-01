@@ -1,5 +1,11 @@
 # @chinello-playground/backend
 
+## 2.2.1-rc.0
+
+### Patch Changes
+
+- a9bdc31: some cleanup
+
 ## 2.2.0
 
 ### Patch Changes
