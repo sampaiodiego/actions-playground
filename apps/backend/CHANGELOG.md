@@ -1,5 +1,11 @@
 # @chinello-playground/backend
 
+## 3.0.0-rc.0
+
+### Major Changes
+
+- e7485be: create github release
+
 ## 2.3.0
 
 ### Minor Changes
