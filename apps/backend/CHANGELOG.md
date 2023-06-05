@@ -1,5 +1,11 @@
 # @chinello-playground/backend
 
+## 3.0.1
+
+### Patch Changes
+
+- 758a518: patch to backend
+
 ## 3.0.0
 
 ### Major Changes
