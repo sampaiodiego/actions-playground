@@ -91,6 +91,14 @@ const setupOctokit = (githubToken) => {
 
 	await exec('yarn', ['changeset', 'publish']);
 
+	await exec("git", [
+		"push",
+		"--force",
+		"--follow-tags",
+		"origin",
+		`HEAD:refs/heads/${newBranch}`,
+	]);
+
 	// TODO create PR body
 	if (newVersion.includes('rc.0')) {
 		const prBody = 'new release';
@@ -105,14 +113,6 @@ const setupOctokit = (githubToken) => {
 			...github.context.repo,
 		});
 	}
-
-	await exec("git", [
-		"push",
-		"--force",
-		"--follow-tags",
-		"origin",
-		`HEAD:refs/heads/${newBranch}`,
-	]);
 
 	// TODO create release on github
 })();
