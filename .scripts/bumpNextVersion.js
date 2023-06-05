@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('@actions/exec');
+const { GitHub, getOctokitOptions } = require("@actions/github/lib/utils");
+const { throttling } = require("@octokit/plugin-throttling");
+const core = require('@actions/core');
+const github = require('@actions/github');
 
 const setupUser = async () => {
 	await exec("git", [
@@ -15,8 +19,50 @@ const setupUser = async () => {
 	]);
 };
 
+
+const setupOctokit = (githubToken) => {
+	return new (GitHub.plugin(throttling))(
+	  getOctokitOptions(githubToken, {
+		throttle: {
+		  onRateLimit: (retryAfter, options, octokit, retryCount) => {
+			core.warning(
+			  `Request quota exhausted for request ${options.method} ${options.url}`
+			);
+
+			if (retryCount <= 2) {
+			  core.info(`Retrying after ${retryAfter} seconds!`);
+			  return true;
+			}
+		  },
+		  onSecondaryRateLimit: (
+			retryAfter,
+			options,
+			octokit,
+			retryCount
+		  ) => {
+			core.warning(
+			  `SecondaryRateLimit detected for request ${options.method} ${options.url}`
+			);
+
+			if (retryCount <= 2) {
+			  core.info(`Retrying after ${retryAfter} seconds!`);
+			  return true;
+			}
+		  },
+		},
+	  })
+	);
+};
+
 (async () => {
+	const githubToken = process.env.GITHUB_TOKEN;
+	if (!githubToken) {
+		core.setFailed("Please add the GITHUB_TOKEN to the action");
+		return;
+	}
+
 	await setupUser();
+	const octokit = setupOctokit(githubToken);
 
 	// start release candidate
 	await exec('yarn', ['changeset', 'pre', 'enter', 'rc']);
@@ -27,7 +73,9 @@ const setupUser = async () => {
 	// get version from main package
 	const { version: newVersion } = require(path.join(__dirname, '..', 'apps', 'backend', 'package.json'));
 
-	const newBranch = `release-${newVersion.split('-')[0]}`;
+	const finalVersion = newVersion.split('-')[0];
+
+	const newBranch = `release-${finalVersion}`;
 
 	// update root package.json
 	const rootPackageJsonPath = path.join(__dirname, "..", "package.json");
@@ -46,8 +94,6 @@ const setupUser = async () => {
 
 	await exec('yarn', ['changeset', 'publish']);
 
-	// TODO create pull request to master on rc.0
-
 	await exec("git", [
 		"push",
 		"--force",
@@ -55,6 +101,21 @@ const setupUser = async () => {
 		"origin",
 		`HEAD:refs/heads/${newBranch}`,
 	]);
+
+	// TODO create PR body
+	if (newVersion.includes('rc.0')) {
+		const prBody = 'new release';
+		const finalPrTitle = `Release ${finalVersion}`;
+
+		core.info("creating pull request");
+		const { data: newPullRequest } = await octokit.rest.pulls.create({
+			base: 'master',
+			head: newBranch,
+			title: finalPrTitle,
+			body: prBody,
+			...github.context.repo,
+		});
+	}
 
 	// TODO create release on github
 })();
