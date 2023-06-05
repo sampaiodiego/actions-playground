@@ -20,6 +20,7 @@
     "@changesets/cli": "^2.26.1"
   },
   "devDependencies": {
-    "@actions/exec": "^1.1.1"
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1"
   }
 }
