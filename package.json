@@ -1,6 +1,6 @@
 {
   "name": "actions-playground",
-  "version": "2.2.3-rc.0",
+  "version": "2.2.3",
   "description": "new commit",
   "main": "index.js",
   "scripts": {

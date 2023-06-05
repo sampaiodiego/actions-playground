@@ -1,5 +1,11 @@
 # @chinello-playground/backend
 
+## 2.2.3
+
+### Patch Changes
+
+- 4713b67: create pull request
+
 ## 2.2.3-rc.0
 
 ### Patch Changes
