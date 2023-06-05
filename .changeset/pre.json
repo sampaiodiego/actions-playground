@@ -1,0 +1,12 @@
+{
+  "mode": "pre",
+  "tag": "rc",
+  "initialVersions": {
+    "@diegosampaio/backend": "2.2.1",
+    "@diegosampaio/next-app": "2.2.1",
+    "@diegosampaio/theme": "2.2.1"
+  },
+  "changesets": [
+    "shiny-dots-cough"
+  ]
+}

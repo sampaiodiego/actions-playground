@@ -1,5 +1,7 @@
 # @chinello-playground/backend
 
+## 2.2.2-rc.0
+
 ## 2.2.1
 
 ### Patch Changes
