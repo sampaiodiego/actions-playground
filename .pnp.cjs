@@ -45,7 +45,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@actions/exec", "npm:1.1.1"],\
             ["@actions/github", "npm:5.1.1"],\
-            ["@changesets/cli", "npm:2.26.1"]\
+            ["@changesets/cli", "npm:2.26.1"],\
+            ["@octokit/plugin-throttling", "virtual:ee99f26c65a7cb249ea79869179c322b299a5fe96d32eaa7d2e1260e2e2489450cc829e75cecb98c9f0cf9dd7bdc6cf4f82ab99c157a9f12f54b1a729fdcefa8#npm:6.0.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -530,6 +531,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@octokit/openapi-types", "npm:12.11.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:17.2.0", {\
+          "packageLocation": "./.yarn/cache/@octokit-openapi-types-npm-17.2.0-e9456595e7-29995e34f9.zip/node_modules/@octokit/openapi-types/",\
+          "packageDependencies": [\
+            ["@octokit/openapi-types", "npm:17.2.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@octokit/plugin-paginate-rest", [\
@@ -579,6 +587,30 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@octokit/plugin-throttling", [\
+        ["npm:6.0.0", {\
+          "packageLocation": "./.yarn/cache/@octokit-plugin-throttling-npm-6.0.0-8077abacd6-29d2a4ef46.zip/node_modules/@octokit/plugin-throttling/",\
+          "packageDependencies": [\
+            ["@octokit/plugin-throttling", "npm:6.0.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ee99f26c65a7cb249ea79869179c322b299a5fe96d32eaa7d2e1260e2e2489450cc829e75cecb98c9f0cf9dd7bdc6cf4f82ab99c157a9f12f54b1a729fdcefa8#npm:6.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/@octokit-plugin-throttling-virtual-b4a512d6e3/0/cache/@octokit-plugin-throttling-npm-6.0.0-8077abacd6-29d2a4ef46.zip/node_modules/@octokit/plugin-throttling/",\
+          "packageDependencies": [\
+            ["@octokit/plugin-throttling", "virtual:ee99f26c65a7cb249ea79869179c322b299a5fe96d32eaa7d2e1260e2e2489450cc829e75cecb98c9f0cf9dd7bdc6cf4f82ab99c157a9f12f54b1a729fdcefa8#npm:6.0.0"],\
+            ["@octokit/core", null],\
+            ["@octokit/types", "npm:9.2.3"],\
+            ["@types/octokit__core", null],\
+            ["bottleneck", "npm:2.19.5"]\
+          ],\
+          "packagePeers": [\
+            "@octokit/core",\
+            "@types/octokit__core"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@octokit/request", [\
         ["npm:5.6.3", {\
           "packageLocation": "./.yarn/cache/@octokit-request-npm-5.6.3-25a5f5382d-c0b4542eb4.zip/node_modules/@octokit/request/",\
@@ -612,6 +644,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@octokit/types", "npm:6.41.0"],\
             ["@octokit/openapi-types", "npm:12.11.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:9.2.3", {\
+          "packageLocation": "./.yarn/cache/@octokit-types-npm-9.2.3-7489397f39-6806413089.zip/node_modules/@octokit/types/",\
+          "packageDependencies": [\
+            ["@octokit/types", "npm:9.2.3"],\
+            ["@octokit/openapi-types", "npm:17.2.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -669,7 +709,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["actions-playground", "workspace:."],\
             ["@actions/exec", "npm:1.1.1"],\
             ["@actions/github", "npm:5.1.1"],\
-            ["@changesets/cli", "npm:2.26.1"]\
+            ["@changesets/cli", "npm:2.26.1"],\
+            ["@octokit/plugin-throttling", "virtual:ee99f26c65a7cb249ea79869179c322b299a5fe96d32eaa7d2e1260e2e2489450cc829e75cecb98c9f0cf9dd7bdc6cf4f82ab99c157a9f12f54b1a729fdcefa8#npm:6.0.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -786,6 +827,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["better-path-resolve", "npm:1.0.0"],\
             ["is-windows", "npm:1.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["bottleneck", [\
+        ["npm:2.19.5", {\
+          "packageLocation": "./.yarn/cache/bottleneck-npm-2.19.5-2c6092aa17-c5eef1bbea.zip/node_modules/bottleneck/",\
+          "packageDependencies": [\
+            ["bottleneck", "npm:2.19.5"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('@actions/exec');
 const { GitHub, getOctokitOptions } = require("@actions/github/lib/utils");
+const { throttling } = require("@octokit/plugin-throttling");
 
 const setupUser = async () => {
 	await exec("git", [
