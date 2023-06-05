@@ -43,12 +43,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@actions/core", "npm:1.10.0"],\
             ["@actions/exec", "npm:1.1.1"],\
             ["@actions/github", "npm:5.1.1"],\
             ["@changesets/cli", "npm:2.26.1"],\
             ["@octokit/plugin-throttling", "virtual:ee99f26c65a7cb249ea79869179c322b299a5fe96d32eaa7d2e1260e2e2489450cc829e75cecb98c9f0cf9dd7bdc6cf4f82ab99c157a9f12f54b1a729fdcefa8#npm:6.0.0"]\
           ],\
           "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@actions/core", [\
+        ["npm:1.10.0", {\
+          "packageLocation": "./.yarn/cache/@actions-core-npm-1.10.0-6885534582-0a75621e00.zip/node_modules/@actions/core/",\
+          "packageDependencies": [\
+            ["@actions/core", "npm:1.10.0"],\
+            ["@actions/http-client", "npm:2.1.0"],\
+            ["uuid", "npm:8.3.2"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@actions/exec", [\
@@ -707,6 +719,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["actions-playground", "workspace:."],\
+            ["@actions/core", "npm:1.10.0"],\
             ["@actions/exec", "npm:1.1.1"],\
             ["@actions/github", "npm:5.1.1"],\
             ["@changesets/cli", "npm:2.26.1"],\
@@ -2901,6 +2914,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/universalify-npm-0.1.2-9b22d31d2d-40cdc60f6e.zip/node_modules/universalify/",\
           "packageDependencies": [\
             ["universalify", "npm:0.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["uuid", [\
+        ["npm:8.3.2", {\
+          "packageLocation": "./.yarn/cache/uuid-npm-8.3.2-eca0baba53-5575a8a75c.zip/node_modules/uuid/",\
+          "packageDependencies": [\
+            ["uuid", "npm:8.3.2"]\
           ],\
           "linkType": "HARD"\
         }]\
