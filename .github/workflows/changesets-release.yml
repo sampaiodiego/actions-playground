@@ -23,17 +23,11 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
-      - name: Authenticate with private NPM package
+      - name: Authenticate to NPM registry
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
-      - name: Create tags
+      - name: Cut release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn release
-
-      - name: Push tags
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git push origin --tags
+          yarn node .scripts/cutFinalRelease.js

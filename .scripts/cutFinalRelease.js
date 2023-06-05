@@ -17,16 +17,15 @@ const setupUser = async () => {
 (async () => {
 	await setupUser();
 
-	// start release candidate
-	await exec('yarn', ['changeset', 'pre', 'enter', 'rc']);
+	// TODO check first if need to exit prelease
+	// finish release candidate
+	await exec('yarn', ['changeset', 'pre', 'exit']);
 
 	// bump version of all packages to rc
 	await exec('yarn', ['changeset', 'version']);
 
 	// get version from main package
 	const { version: newVersion } = require(path.join(__dirname, '..', 'apps', 'backend', 'package.json'));
-
-	const newBranch = `release-${newVersion.split('-')[0]}`;
 
 	// update root package.json
 	const rootPackageJsonPath = path.join(__dirname, "..", "package.json");
@@ -37,7 +36,6 @@ const setupUser = async () => {
 	);
 	fs.writeFileSync(rootPackageJsonPath, updatedContent);
 
-	await exec("git", ["checkout", "-b", newBranch]);
 	await exec("git", ['add', '.']);
 	await exec("git", ["commit", "-m", newVersion]);
 
@@ -45,10 +43,7 @@ const setupUser = async () => {
 
 	await exec("git", [
 		"push",
-		"--force",
 		"--follow-tags",
-		"origin",
-		`HEAD:refs/heads/${newBranch}`,
 	]);
 
 	// TODO create release on github
