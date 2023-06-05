@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('@actions/exec');
-import { GitHub, getOctokitOptions } from "@actions/github/lib/utils";
+const { GitHub, getOctokitOptions } = require("@actions/github/lib/utils");
 
 const setupUser = async () => {
 	await exec("git", [
