@@ -19,38 +19,37 @@ const setupUser = async () => {
 	]);
 };
 
-
 const setupOctokit = (githubToken) => {
 	return new (GitHub.plugin(throttling))(
-	  getOctokitOptions(githubToken, {
-		throttle: {
-		  onRateLimit: (retryAfter, options, octokit, retryCount) => {
-			core.warning(
-			  `Request quota exhausted for request ${options.method} ${options.url}`
-			);
+		getOctokitOptions(githubToken, {
+			throttle: {
+				onRateLimit: (retryAfter, options, octokit, retryCount) => {
+					core.warning(
+						`Request quota exhausted for request ${options.method} ${options.url}`
+					);
 
-			if (retryCount <= 2) {
-			  core.info(`Retrying after ${retryAfter} seconds!`);
-			  return true;
-			}
-		  },
-		  onSecondaryRateLimit: (
-			retryAfter,
-			options,
-			octokit,
-			retryCount
-		  ) => {
-			core.warning(
-			  `SecondaryRateLimit detected for request ${options.method} ${options.url}`
-			);
+					if (retryCount <= 2) {
+						core.info(`Retrying after ${retryAfter} seconds!`);
+						return true;
+					}
+				},
+				onSecondaryRateLimit: (
+					retryAfter,
+					options,
+					octokit,
+					retryCount
+				) => {
+					core.warning(
+						`SecondaryRateLimit detected for request ${options.method} ${options.url}`
+					);
 
-			if (retryCount <= 2) {
-			  core.info(`Retrying after ${retryAfter} seconds!`);
-			  return true;
-			}
-		  },
-		},
-	  })
+					if (retryCount <= 2) {
+						core.info(`Retrying after ${retryAfter} seconds!`);
+						return true;
+					}
+				},
+			},
+		})
 	);
 };
 
@@ -117,5 +116,11 @@ const setupOctokit = (githubToken) => {
 		});
 	}
 
-	// TODO create release on github
+	await octokit.rest.repos.createRelease({
+		name: newVersion,
+		tag_name: newVersion,
+		body: '// TODO get changelog \nnew release body',
+		prerelease: newVersion.includes("-"),
+		...github.context.repo,
+	});
 })();
