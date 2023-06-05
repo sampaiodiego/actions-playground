@@ -1,5 +1,21 @@
 # @chinello-playground/next-app
 
+## 2.2.2
+
+### Patch Changes
+
+- d7b9748: fix replace script
+  - @diegosampaio/backend@2.2.2
+  - @diegosampaio/theme@2.2.2
+
+## 2.2.2-rc.0
+
+### Patch Changes
+
+- d7b9748: fix replace script
+  - @diegosampaio/backend@2.2.2-rc.0
+  - @diegosampaio/theme@2.2.2-rc.0
+
 ## 2.2.1
 
 ### Patch Changes
