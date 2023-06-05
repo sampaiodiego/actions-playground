@@ -32,7 +32,7 @@ const setupUser = async () => {
 	const rootPackageJsonPath = path.join(__dirname, "..", "package.json");
 	const content = fs.readFileSync(rootPackageJsonPath, "utf8");
 	const updatedContent = content.replace(
-		/"version": ".*",^/,
+		/"version": ".*",$/m,
 		`"version": "${newVersion}",`
 	);
 	fs.writeFileSync(rootPackageJsonPath, updatedContent);
