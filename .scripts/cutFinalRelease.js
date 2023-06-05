@@ -18,18 +18,28 @@ const setupUser = async () => {
 (async () => {
 	await setupUser();
 
-	// TODO check first if need to exit prelease
-	// finish release candidate
-	await exec('yarn', ['changeset', 'pre', 'exit']);
+	let preRelease = false;
+	try {
+		fs.accessSync(path.resolve(__dirname, '..', '.changeset', 'pre.json'));
+
+		preRelease = true;
+	} catch (e) {
+		// nothing to do, not a pre release
+	}
+
+	if (preRelease) {
+		// finish release candidate
+		await exec('yarn', ['changeset', 'pre', 'exit']);
+	}
 
 	// bump version of all packages to rc
 	await exec('yarn', ['changeset', 'version']);
 
 	// get version from main package
-	const { version: newVersion } = require(path.join(__dirname, '..', 'apps', 'backend', 'package.json'));
+	const { version: newVersion } = require(path.resolve(__dirname, '..', 'apps', 'backend', 'package.json'));
 
 	// update root package.json
-	const rootPackageJsonPath = path.join(__dirname, "..", "package.json");
+	const rootPackageJsonPath = path.resolve(__dirname, "..", "package.json");
 	const content = fs.readFileSync(rootPackageJsonPath, "utf8");
 	const updatedContent = content.replace(
 		/"version": ".*",$/m,
