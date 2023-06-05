@@ -1,5 +1,11 @@
 # @chinello-playground/backend
 
+## 2.3.0
+
+### Minor Changes
+
+- 1028d25: no need pre-release anymore
+
 ## 2.2.3
 
 ### Patch Changes

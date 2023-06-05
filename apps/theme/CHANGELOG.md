@@ -1,5 +1,7 @@
 # @diegosampaio/theme
 
+## 2.3.0
+
 ## 2.2.3
 
 ## 2.2.3-rc.0
