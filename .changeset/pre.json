@@ -1,0 +1,12 @@
+{
+  "mode": "pre",
+  "tag": "rc",
+  "initialVersions": {
+    "@diegosampaio/backend": "2.2.2",
+    "@diegosampaio/next-app": "2.2.2",
+    "@diegosampaio/theme": "2.2.2"
+  },
+  "changesets": [
+    "pink-baboons-hope"
+  ]
+}
