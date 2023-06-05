@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const { exec } = require('@actions/exec');
 
@@ -37,11 +38,15 @@ const setupUser = async () => {
 	);
 	fs.writeFileSync(rootPackageJsonPath, updatedContent);
 
+	// TODO check if branch exists
 	await exec("git", ["checkout", "-b", newBranch]);
+
 	await exec("git", ['add', '.']);
 	await exec("git", ["commit", "-m", newVersion]);
 
 	await exec('yarn', ['changeset', 'publish']);
+
+	// TODO create pull request to master on rc.0
 
 	await exec("git", [
 		"push",
