@@ -1,0 +1,27 @@
+name: Cut Final Release
+description: Cut Final Release of packages
+
+inputs:
+  action:
+    description: "The main action to perform: cut, publish, or both"
+    required: true
+#   docker-tag:
+#     required: true
+#   release:
+#     required: true
+#   username:
+#     required: false
+#   password:
+#     required: false
+
+# outputs:
+#   image-name:
+#     value: ${{ steps.build-image.outputs.image-name }}
+
+runs:
+  using: "node16"
+  main: "dist/index.js"
+
+branding:
+  icon: "package"
+  color: "blue"

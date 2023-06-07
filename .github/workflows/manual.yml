@@ -34,17 +34,14 @@ jobs:
 
     - run: yarn install
 
-    # - run: npm i -g @rocket.chat/houston@next
-
-    # - run: houston create-branch -t ${{ github.event.inputs.name }} -b ${{ github.event.inputs.base-ref }}
-
-    - name: Authenticate with private NPM package
-      if: ${{ github.event.inputs.name == 'next' }}
-      run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+    - name: Build
+      run: yarn build
 
     - name: Create Pull Request if next
       if: ${{ github.event.inputs.name == 'next' }}
+      uses: ./packages/release-action
+      with:
+        action: bump
       env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        yarn node .scripts/bumpNextVersion.js
