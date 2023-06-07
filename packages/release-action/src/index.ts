@@ -1,5 +1,7 @@
-import * as core from "@actions/core";
 import fs from 'fs';
+
+import * as core from "@actions/core";
+
 import { cutFinalRelease } from "./cutFinalRelease";
 import { setupGitUser } from "./gitUtils";
 import { bumpNextVersion } from "./bumpNextVersion";
@@ -21,6 +23,8 @@ import { bumpNextVersion } from "./bumpNextVersion";
 
 	core.info("setting git user");
 	await setupGitUser();
+
+	console.log('process.env.HOME ->', process.env.HOME);
 
 	core.info("setting GitHub credentials");
 	fs.writeFileSync(

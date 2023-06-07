@@ -3,7 +3,8 @@ import fsPromise from 'fs/promises';
 import core from '@actions/core';
 
 export async function createNpmFile() {
-	let userNpmrcPath = `${process.env.HOME}/.npmrc`;
+	const userNpmrcPath = `${process.env.HOME}/.npmrc`;
+	console.log('userNpmrcPath ->', userNpmrcPath);
 	if (fs.existsSync(userNpmrcPath)) {
 		core.info("Found existing user .npmrc file");
 		const userNpmrcContent = await fsPromise.readFile(userNpmrcPath, "utf8");
