@@ -24,8 +24,6 @@ import { bumpNextVersion } from "./bumpNextVersion";
 	core.info("setting git user");
 	await setupGitUser();
 
-	console.log('process.env.HOME ->', process.env.HOME);
-
 	core.info("setting GitHub credentials");
 	fs.writeFileSync(
 		`${process.env.HOME}/.netrc`,
