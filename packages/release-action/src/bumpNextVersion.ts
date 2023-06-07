@@ -7,9 +7,13 @@ import core from '@actions/core';
 import github from '@actions/github';
 
 import { setupOctokit } from "./setupOctokit";
+import { createNpmFile } from './createNpmFile';
 
 export async function bumpNextVersion({ githubToken, cwd = process.cwd() }: { githubToken: string; cwd?: string }) {
 	const octokit = setupOctokit(githubToken);
+
+	// TODO do this only if publishing to npm
+	await createNpmFile();
 
 	// start release candidate
 	await exec('yarn', ['changeset', 'pre', 'enter', 'rc']);
