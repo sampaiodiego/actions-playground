@@ -7,7 +7,7 @@ export async function createNpmFile() {
 	const userNpmrcPath = `${process.env.HOME}/.npmrc`;
 	console.log('userNpmrcPath ->', userNpmrcPath);
 
-	console.log('core.info ->', core.info);
+	console.log('core ->', core);
 
 	if (fs.existsSync(userNpmrcPath)) {
 		core.info("Found existing user .npmrc file");
