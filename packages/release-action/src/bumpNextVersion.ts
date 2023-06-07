@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 
 import { exec } from '@actions/exec';
-import core from '@actions/core';
-import github from '@actions/github';
+import * as core from '@actions/core';
+import * as github from '@actions/github';
 
 import { setupOctokit } from "./setupOctokit";
 import { createNpmFile } from './createNpmFile';

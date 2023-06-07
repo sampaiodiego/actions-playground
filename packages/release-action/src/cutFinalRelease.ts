@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { exec } from '@actions/exec';
-import github from '@actions/github';
+import * as github from '@actions/github';
 
 import { createNpmFile } from './createNpmFile';
 import { setupOctokit } from './setupOctokit';

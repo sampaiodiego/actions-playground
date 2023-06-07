@@ -1,7 +1,7 @@
 import fs from 'fs';
 import fsPromise from 'fs/promises';
 
-import core from '@actions/core';
+import * as core from '@actions/core';
 
 export async function createNpmFile() {
 	const userNpmrcPath = `${process.env.HOME}/.npmrc`;

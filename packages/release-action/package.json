@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "ncc build src/index.ts -o dist --transpile-only --minify"
+    "build:ncc": "ncc build src/index.ts -o dist --transpile-only --minify",
+    "build": "tsc"
   },
   "main": "dist/index.js",
   "packageManager": "yarn@3.5.1",
