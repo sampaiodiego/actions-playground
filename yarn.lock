@@ -339,6 +339,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@diegosampaio/release-action@workspace:packages/release-action":
+  version: 0.0.0-use.local
+  resolution: "@diegosampaio/release-action@workspace:packages/release-action"
+  dependencies:
+    "@actions/core": ^1.10.0
+    "@actions/exec": ^1.1.1
+    "@actions/github": ^5.1.1
+    "@octokit/plugin-throttling": ^6.0.0
+    "@types/node": ^16
+    typescript: ^5.1.3
+  languageName: unknown
+  linkType: soft
+
 "@diegosampaio/theme@workspace:^, @diegosampaio/theme@workspace:apps/theme":
   version: 0.0.0-use.local
   resolution: "@diegosampaio/theme@workspace:apps/theme"
@@ -556,6 +569,13 @@ __metadata:
   version: 12.20.55
   resolution: "@types/node@npm:12.20.55"
   checksum: e4f86785f4092706e0d3b0edff8dca5a13b45627e4b36700acd8dfe6ad53db71928c8dee914d4276c7fd3b6ccd829aa919811c9eb708a2c8e4c6eb3701178c37
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^16":
+  version: 16.18.34
+  resolution: "@types/node@npm:16.18.34"
+  checksum: 35c0ffe09687578d002ceb7e706d0ba450546aeb3d2716f28691f2af0063bd274dbde0f741d087ea217f2a8db413eb700d22dfb4f08a67986ff801423bd7be8d
   languageName: node
   linkType: hard
 
@@ -2487,6 +2507,26 @@ __metadata:
     for-each: ^0.3.3
     is-typed-array: ^1.1.9
   checksum: 2228febc93c7feff142b8c96a58d4a0d7623ecde6c7a24b2b98eb3170e99f7c7eff8c114f9b283085cd59dcd2bd43aadf20e25bba4b034a53c5bb292f71f8956
+  languageName: node
+  linkType: hard
+
+"typescript@npm:^5.1.3":
+  version: 5.1.3
+  resolution: "typescript@npm:5.1.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: d9d51862d98efa46534f2800a1071a613751b1585dc78884807d0c179bcd93d6e9d4012a508e276742f5f33c480adefc52ffcafaf9e0e00ab641a14cde9a31c7
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^5.1.3#~builtin<compat/typescript>":
+  version: 5.1.3
+  resolution: "typescript@patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=77c9e2"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 32a25b2e128a4616f999d4ee502aabb1525d5647bc8955e6edf05d7fbc53af8aa98252e2f6ba80bcedfc0260c982b885f3c09cfac8bb65d2924f3133ad1e1e62
   languageName: node
   linkType: hard
 

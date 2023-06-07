@@ -83,6 +83,8 @@ const setupOctokit = (githubToken) => {
 	// get version from main package
 	const { version: newVersion } = require(path.resolve(__dirname, '..', 'apps', 'backend', 'package.json'));
 
+	// TODO get changelog from main package and copy to root package
+
 	// update root package.json
 	const rootPackageJsonPath = path.resolve(__dirname, "..", "package.json");
 	const content = fs.readFileSync(rootPackageJsonPath, "utf8");

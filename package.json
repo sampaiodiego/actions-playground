@@ -4,6 +4,8 @@
   "description": "new commit",
   "main": "index.js",
   "scripts": {
+    "build": "yarn build:action",
+    "build:action": "yarn workspace @diegosampaio/release-action run build",
     "release": "echo 'doing a release' && changeset publish"
   },
   "repository": {
@@ -14,7 +16,8 @@
   "packageManager": "yarn@3.5.1",
   "private": true,
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "dependencies": {
     "@changesets/cli": "^2.26.1"

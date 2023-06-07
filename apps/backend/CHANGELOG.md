@@ -1,5 +1,11 @@
 # @chinello-playground/backend
 
+## 3.0.2-rc.0
+
+### Patch Changes
+
+- 9710fb7: patch to backend
+
 ## 3.0.1
 
 ### Patch Changes
