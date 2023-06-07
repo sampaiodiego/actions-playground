@@ -23,7 +23,6 @@ export async function bumpNextVersion({ githubToken, cwd = process.cwd() }: { gi
 
 	// get version from main package
 	const mainPackagePath = path.join(cwd, 'apps', 'backend', 'package.json');
-	console.log('mainPackagePath ->', mainPackagePath);
 	const { version: newVersion } = require(mainPackagePath);
 
 	// TODO get changelog from main package and copy to root package
