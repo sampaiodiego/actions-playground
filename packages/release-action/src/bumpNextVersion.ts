@@ -8,7 +8,7 @@ import github from '@actions/github';
 
 import { setupOctokit } from "./setupOctokit";
 
-export async function bumpNextVersion(githubToken: string) {
+export async function bumpNextVersion({ githubToken, cwd = process.cwd() }: { githubToken: string; cwd?: string }) {
 	const octokit = setupOctokit(githubToken);
 
 	// start release candidate
@@ -18,7 +18,9 @@ export async function bumpNextVersion(githubToken: string) {
 	await exec('yarn', ['changeset', 'version']);
 
 	// get version from main package
-	const { version: newVersion } = require(path.join(__dirname, '..', 'apps', 'backend', 'package.json'));
+	const mainPackagePath = path.join(cwd, 'apps', 'backend', 'package.json');
+	console.log('mainPackagePath ->', mainPackagePath);
+	const { version: newVersion } = require(mainPackagePath);
 
 	// TODO get changelog from main package and copy to root package
 

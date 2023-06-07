@@ -7,7 +7,7 @@ import github from '@actions/github';
 import { createNpmFile } from './createNpmFile';
 import { setupOctokit } from './setupOctokit';
 
-export async function cutFinalRelease(githubToken: string) {
+export async function cutFinalRelease({ githubToken, cwd = process.cwd() }: { githubToken: string; cwd?: string }) {
 	const octokit = setupOctokit(githubToken);
 
 	// TODO do this only if publishing to npm
@@ -15,7 +15,7 @@ export async function cutFinalRelease(githubToken: string) {
 
 	let preRelease = false;
 	try {
-		fs.accessSync(path.resolve(__dirname, '..', '.changeset', 'pre.json'));
+		fs.accessSync(path.resolve(cwd, '.changeset', 'pre.json'));
 
 		preRelease = true;
 	} catch (e) {
@@ -31,12 +31,12 @@ export async function cutFinalRelease(githubToken: string) {
 	await exec('yarn', ['changeset', 'version']);
 
 	// get version from main package
-	const { version: newVersion } = require(path.resolve(__dirname, '..', 'apps', 'backend', 'package.json'));
+	const { version: newVersion } = require(path.resolve(cwd, 'apps', 'backend', 'package.json'));
 
 	// TODO get changelog from main package and copy to root package
 
 	// update root package.json
-	const rootPackageJsonPath = path.resolve(__dirname, "..", "package.json");
+	const rootPackageJsonPath = path.resolve(cwd, "package.json");
 	const content = fs.readFileSync(rootPackageJsonPath, "utf8");
 	const updatedContent = content.replace(
 		/"version": ".*",$/m,

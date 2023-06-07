@@ -13,11 +13,11 @@ import { bumpNextVersion } from "./bumpNextVersion";
 		return;
 	}
 
-	const inputCwd = core.getInput("cwd");
-	if (inputCwd) {
-		core.info("changing directory to the one given as the input");
-		process.chdir(inputCwd);
-	}
+	// const inputCwd = core.getInput("cwd");
+	// if (inputCwd) {
+	// 	core.info("changing directory to the one given as the input");
+	// 	process.chdir(inputCwd);
+	// }
 
 	core.info("setting git user");
 	await setupGitUser();
@@ -31,9 +31,9 @@ import { bumpNextVersion } from "./bumpNextVersion";
 	const action = core.getInput("action");
 
 	if (action === 'cut') {
-		await cutFinalRelease(githubToken);
+		await cutFinalRelease({ githubToken });
 	} else if (action === 'bump') {
-		await bumpNextVersion(githubToken);
+		await bumpNextVersion({ githubToken });
 	}
 })().catch((err) => {
 	core.error(err);
