@@ -1,5 +1,13 @@
 # @chinello-playground/next-app
 
+## 3.0.1
+
+### Patch Changes
+
+- Updated dependencies [758a518]
+  - @diegosampaio/backend@3.0.1
+  - @diegosampaio/theme@3.0.1
+
 ## 3.0.0
 
 ### Patch Changes
