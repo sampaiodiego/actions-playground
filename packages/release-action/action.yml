@@ -3,7 +3,7 @@ description: Cut Final Release of packages
 
 inputs:
   action:
-    description: "The main action to perform: cut, publish, or both"
+    description: "The main action to perform: cut, bump, or both"
     required: true
 #   docker-tag:
 #     required: true
