@@ -5,14 +5,9 @@ inputs:
   action:
     description: "The main action to perform: cut, bump, or both"
     required: true
-#   docker-tag:
-#     required: true
-#   release:
-#     required: true
-#   username:
-#     required: false
-#   password:
-#     required: false
+  base-ref:
+    description: "Base ref to use for the release"
+    required: false
 
 # outputs:
 #   image-name:
