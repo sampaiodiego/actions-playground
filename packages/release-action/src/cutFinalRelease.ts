@@ -1,12 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 
-import { exec } from '@actions/exec';
+import { exec,  } from '@actions/exec';
 import * as github from '@actions/github';
 
 import { createNpmFile } from './createNpmFile';
 import { setupOctokit } from './setupOctokit';
 import { getChangelogEntry, updateVersionPackageJson } from './utils';
+import { fixWorkspaceVersionsBeforePublish } from './fixWorkspaceVersionsBeforePublish';
 
 export async function cutFinalRelease({ githubToken, cwd = process.cwd() }: { githubToken: string; cwd?: string }) {
 	const octokit = setupOctokit(githubToken);
@@ -58,6 +59,8 @@ export async function cutFinalRelease({ githubToken, cwd = process.cwd() }: { gi
 
 	await exec("git", ['add', '.']);
 	await exec("git", ["commit", "-m", newVersion]);
+
+	await fixWorkspaceVersionsBeforePublish();
 
 	await exec('yarn', ['changeset', 'publish']);
 
