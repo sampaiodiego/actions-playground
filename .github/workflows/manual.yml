@@ -45,3 +45,13 @@ jobs:
       env:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Start patch release
+      if: ${{ github.event.inputs.name == 'patch' }}
+      uses: ./packages/release-action
+      with:
+        action: patch
+        base-ref: ${{ github.event.inputs.base-ref }}
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
