@@ -6,7 +6,7 @@ import { exec } from '@actions/exec';
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 
-import { setupOctokit } from "./setupOctokit";
+import { setupOctokit } from './setupOctokit';
 import { createNpmFile } from './createNpmFile';
 import { getChangelogEntry, updateVersionPackageJson } from './utils';
 import { fixWorkspaceVersionsBeforePublish } from './fixWorkspaceVersionsBeforePublish';
@@ -17,7 +17,7 @@ export async function bumpNextVersion({ githubToken, cwd = process.cwd() }: { gi
 	// TODO do this only if publishing to npm
 	await createNpmFile();
 
-	// TODO need to check if there is any change to "main package", if not, there is no need to enter rc
+	// TODO need to check if there is any change to 'main package', if not, there is no need to enter rc
 	// and instead a normal release of the other packages should be done
 
 	// start release candidate
@@ -55,28 +55,28 @@ export async function bumpNextVersion({ githubToken, cwd = process.cwd() }: { gi
 	updateVersionPackageJson(cwd, newVersion);
 
 	// TODO check if branch exists
-	await exec("git", ["checkout", "-b", newBranch]);
+	await exec('git', ['checkout', '-b', newBranch]);
 
-	await exec("git", ['add', '.']);
-	await exec("git", ["commit", "-m", newVersion]);
+	await exec('git', ['add', '.']);
+	await exec('git', ['commit', '-m', newVersion]);
 
 	await fixWorkspaceVersionsBeforePublish();
 
 	await exec('yarn', ['changeset', 'publish']);
 
-	await exec("git", [
-		"push",
-		"--force",
-		"--follow-tags",
-		"origin",
+	await exec('git', [
+		'push',
+		'--force',
+		'--follow-tags',
+		'origin',
 		`HEAD:refs/heads/${newBranch}`,
 	]);
 
 	if (newVersion.includes('rc.0')) {
 		const finalPrTitle = `Release ${finalVersion}`;
 
-		core.info("creating pull request");
-		const { data: newPullRequest } = await octokit.rest.pulls.create({
+		core.info('creating pull request');
+		await octokit.rest.pulls.create({
 			base: 'master',
 			head: newBranch,
 			title: finalPrTitle,
@@ -89,7 +89,7 @@ export async function bumpNextVersion({ githubToken, cwd = process.cwd() }: { gi
 		name: newVersion,
 		tag_name: newVersion,
 		body: prBody,
-		prerelease: newVersion.includes("-"),
+		prerelease: newVersion.includes('-'),
 		...github.context.repo,
 	});
 }
