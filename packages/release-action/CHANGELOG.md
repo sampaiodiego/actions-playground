@@ -1,5 +1,11 @@
 # @diegosampaio/release-action
 
+## 4.2.0
+
+### Minor Changes
+
+- 3618d6d: new action to start patch release
+
 ## 4.1.0
 
 ### Minor Changes
