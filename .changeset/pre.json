@@ -1,0 +1,15 @@
+{
+  "mode": "pre",
+  "tag": "rc",
+  "initialVersions": {
+    "@diegosampaio/backend": "3.0.2",
+    "@diegosampaio/next-app": "3.0.2",
+    "@diegosampaio/theme": "3.0.2",
+    "@diegosampaio/release-action": "4.0.0"
+  },
+  "changesets": [
+    "blue-seals-raise",
+    "four-sheep-design",
+    "olive-jokes-roll"
+  ]
+}
