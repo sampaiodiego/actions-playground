@@ -6,11 +6,12 @@ import * as github from '@actions/github';
 import * as core from '@actions/core';
 
 import { setupOctokit } from './setupOctokit';
+import { updateVersionPackageJson } from './utils';
 
 export async function startPatchRelease({ githubToken, baseRef, cwd = process.cwd() }: { baseRef: string; githubToken: string; cwd?: string }) {
 	const octokit = setupOctokit(githubToken);
 
-	await exec("git", ["checkout", baseRef]);
+	await exec('git', ['checkout', baseRef]);
 
 	const mainPackagePath = path.join(cwd, 'apps', 'backend');
 
@@ -26,12 +27,16 @@ export async function startPatchRelease({ githubToken, baseRef, cwd = process.cw
 	const newBranch = `release-${newVersion}`;
 
 	// TODO check if branch exists
-	await exec("git", ["checkout", "-b", newBranch]);
+	await exec('git', ['checkout', '-b', newBranch]);
 
-	await exec("git", [
-		"push",
-		"--force",
-		"origin",
+	updateVersionPackageJson(cwd, newVersion);
+
+	await exec('git', ['add', '.']);
+	await exec('git', ['commit', '-m', newVersion]);
+
+	await exec('git', [
+		'push',
+		'origin',
 		`HEAD:refs/heads/${newBranch}`,
 	]);
 
@@ -39,8 +44,8 @@ export async function startPatchRelease({ githubToken, baseRef, cwd = process.cw
 	if (baseRef === 'master') {
 		const finalPrTitle = `Release ${newVersion}`;
 
-		core.info("creating pull request");
-		const { data: newPullRequest } = await octokit.rest.pulls.create({
+		core.info('creating pull request');
+		await octokit.rest.pulls.create({
 			base: 'master',
 			head: newBranch,
 			title: finalPrTitle,
