@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 import unified from "unified";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
@@ -60,4 +63,14 @@ export function getChangelogEntry(changelog: string, version: string) {
 		content: unified().use(remarkStringify).stringify(ast),
 		highestLevel: highestLevel,
 	};
+}
+
+export function updateVersionPackageJson(cwd = process.cwd(), newVersion: string) {
+	const rootPackageJsonPath = path.resolve(cwd, "package.json");
+	const content = fs.readFileSync(rootPackageJsonPath, "utf8");
+	const updatedContent = content.replace(
+		/"version": ".*",$/m,
+		`"version": "${newVersion}",`
+	);
+	fs.writeFileSync(rootPackageJsonPath, updatedContent);
 }

@@ -6,7 +6,7 @@ import * as github from '@actions/github';
 
 import { createNpmFile } from './createNpmFile';
 import { setupOctokit } from './setupOctokit';
-import { getChangelogEntry } from './utils';
+import { getChangelogEntry, updateVersionPackageJson } from './utils';
 
 export async function cutFinalRelease({ githubToken, cwd = process.cwd() }: { githubToken: string; cwd?: string }) {
 	const octokit = setupOctokit(githubToken);
@@ -54,13 +54,7 @@ export async function cutFinalRelease({ githubToken, cwd = process.cwd() }: { gi
 	const releaseBody = changelogEntry.content;
 
 	// update root package.json
-	const rootPackageJsonPath = path.resolve(cwd, "package.json");
-	const content = fs.readFileSync(rootPackageJsonPath, "utf8");
-	const updatedContent = content.replace(
-		/"version": ".*",$/m,
-		`"version": "${newVersion}",`
-	);
-	fs.writeFileSync(rootPackageJsonPath, updatedContent);
+	updateVersionPackageJson(cwd, newVersion);
 
 	await exec("git", ['add', '.']);
 	await exec("git", ["commit", "-m", newVersion]);

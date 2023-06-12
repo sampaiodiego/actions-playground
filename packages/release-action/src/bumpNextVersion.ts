@@ -8,13 +8,16 @@ import * as github from '@actions/github';
 
 import { setupOctokit } from "./setupOctokit";
 import { createNpmFile } from './createNpmFile';
-import { getChangelogEntry } from './utils';
+import { getChangelogEntry, updateVersionPackageJson } from './utils';
 
 export async function bumpNextVersion({ githubToken, cwd = process.cwd() }: { githubToken: string; cwd?: string }) {
 	const octokit = setupOctokit(githubToken);
 
 	// TODO do this only if publishing to npm
 	await createNpmFile();
+
+	// TODO need to check if there is any change to "main package", if not, there is no need to enter rc
+	// and instead a normal release of the other packages should be done
 
 	// start release candidate
 	await exec('yarn', ['changeset', 'pre', 'enter', 'rc']);
@@ -48,13 +51,7 @@ export async function bumpNextVersion({ githubToken, cwd = process.cwd() }: { gi
 	const newBranch = `release-${finalVersion}`;
 
 	// update root package.json
-	const rootPackageJsonPath = path.join(__dirname, "..", "package.json");
-	const content = fs.readFileSync(rootPackageJsonPath, "utf8");
-	const updatedContent = content.replace(
-		/"version": ".*",$/m,
-		`"version": "${newVersion}",`
-	);
-	fs.writeFileSync(rootPackageJsonPath, updatedContent);
+	updateVersionPackageJson(cwd, newVersion);
 
 	// TODO check if branch exists
 	await exec("git", ["checkout", "-b", newBranch]);
