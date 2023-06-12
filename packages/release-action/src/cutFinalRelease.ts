@@ -32,6 +32,7 @@ export async function cutFinalRelease({ githubToken, cwd = process.cwd() }: { gi
 	// bump version of all packages to rc
 	await exec('yarn', ['changeset', 'version']);
 
+	// TODO if main package has no changes, throw error
 
 	const mainPackagePath = path.join(cwd, 'apps', 'backend');
 
@@ -57,23 +58,23 @@ export async function cutFinalRelease({ githubToken, cwd = process.cwd() }: { gi
 	// update root package.json
 	updateVersionPackageJson(cwd, newVersion);
 
-	await exec("git", ['add', '.']);
-	await exec("git", ["commit", "-m", newVersion]);
+	await exec('git', ['add', '.']);
+	await exec('git', ['commit', '-m', newVersion]);
 
 	await fixWorkspaceVersionsBeforePublish();
 
 	await exec('yarn', ['changeset', 'publish']);
 
-	await exec("git", [
-		"push",
-		"--follow-tags",
+	await exec('git', [
+		'push',
+		'--follow-tags',
 	]);
 
 	await octokit.rest.repos.createRelease({
 		name: newVersion,
 		tag_name: newVersion,
 		body: releaseBody,
-		prerelease: newVersion.includes("-"),
+		prerelease: newVersion.includes('-'),
 		...github.context.repo,
 	});
 }
