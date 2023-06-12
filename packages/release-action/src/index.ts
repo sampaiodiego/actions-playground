@@ -32,7 +32,7 @@ import { startPatchRelease } from './startPatchRelease';
 	);
 
 	const action = core.getInput("action");
-	const baseRef = core.getInput("baseRef");
+	const baseRef = core.getInput("base-ref");
 
 	if (action === 'cut') {
 		await cutFinalRelease({ githubToken });
