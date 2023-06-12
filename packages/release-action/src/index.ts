@@ -5,6 +5,7 @@ import * as core from "@actions/core";
 import { cutFinalRelease } from "./cutFinalRelease";
 import { setupGitUser } from "./gitUtils";
 import { bumpNextVersion } from "./bumpNextVersion";
+import { startPatchRelease } from './startPatchRelease';
 
 // const getOptionalInput = (name: string) => core.getInput(name) || undefined;
 
@@ -31,11 +32,14 @@ import { bumpNextVersion } from "./bumpNextVersion";
 	);
 
 	const action = core.getInput("action");
+	const baseRef = core.getInput("baseRef");
 
 	if (action === 'cut') {
 		await cutFinalRelease({ githubToken });
 	} else if (action === 'bump') {
 		await bumpNextVersion({ githubToken });
+	} else if (action === 'patch') {
+		await startPatchRelease({ baseRef, githubToken });
 	}
 })().catch((err) => {
 	core.error(err);
