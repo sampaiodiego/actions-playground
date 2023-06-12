@@ -1,5 +1,16 @@
 # @diegosampaio/release-action
 
+## 4.1.0
+
+### Minor Changes
+
+- 2d62c1d: get version entry to add to release
+
+### Patch Changes
+
+- 82c963f: fix publish package.json workspace
+- 14315a9: fix update root package
+
 ## 4.1.0-rc.0
 
 ### Minor Changes

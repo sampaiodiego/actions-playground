@@ -1,5 +1,7 @@
 # @chinello-playground/backend
 
+## 3.0.3
+
 ## 3.0.3-rc.0
 
 ## 3.0.2

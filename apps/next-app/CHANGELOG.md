@@ -1,5 +1,13 @@
 # @chinello-playground/next-app
 
+## 3.0.3
+
+### Patch Changes
+
+- 82c963f: fix publish package.json workspace
+  - @diegosampaio/backend@3.0.3
+  - @diegosampaio/theme@3.0.3
+
 ## 3.0.3-rc.0
 
 ### Patch Changes
