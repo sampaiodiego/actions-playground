@@ -1,9 +1,6 @@
 name: 'Release PR Description'
 
-on:
-  pull_request:
-    branches:
-      - release-*
+on: pull_request
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
