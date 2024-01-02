@@ -47,13 +47,9 @@ export async function updatePRDescription({
 
 	const { body: originalBody = '' } = result.data;
 
-	console.log('originalBody ->', originalBody);
-
 	const cleanBody = originalBody?.replace(/<!-- release-notes-start -->.*<!-- release-notes-end -->/s, '').trim() || '';
 
-	console.log('cleanBody ->', cleanBody);
-
-	const bodyUpdated = `${cleanBody}\n\n<!-- release-notes-start -->\n# ${newVersion}\n\n${releaseBody}\n<!-- release-notes-end -->`;
+	const bodyUpdated = `${cleanBody}\n\n<!-- release-notes-start -->\n_You can see below a preview of the release change log:_\n# ${newVersion}\n\n${releaseBody}\n<!-- release-notes-end -->`;
 
 	if (bodyUpdated == originalBody) {
 		core.info('no changes to PR description');
