@@ -6,7 +6,7 @@ on:
       - opened
       - synchronize
     branches:
-      - 'release-**'
+      - 'release\-**'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
