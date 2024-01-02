@@ -22,7 +22,6 @@ export async function updatePRDescription({
 	// generate change logs from changesets
 	await exec('yarn', ['changeset', 'version']);
 
-
 	// get version from main package
 	const { version: newVersion } = await readPackageJson(mainPackagePath);
 
