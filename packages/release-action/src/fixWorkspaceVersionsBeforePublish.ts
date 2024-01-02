@@ -46,17 +46,7 @@ export async function fixWorkspaceVersionsBeforePublish() {
 						throw new Error(`Could not find version for workspace ${dependency}`);
 					}
 
-					const semver = dependencyVersion.slice('workspace:'.length);
-
-					if (semver === '*') {
-						packageJson[dependencyType][dependency] = `=${realVersion}`;
-					} else if (semver === '^') {
-						packageJson[dependencyType][dependency] = `^${realVersion}`;
-					} else if (semver === '~') {
-						packageJson[dependencyType][dependency] = `~${realVersion}`;
-					} else {
-						packageJson[dependencyType][dependency] = semver;
-					}
+					packageJson[dependencyType][dependency] = `^${realVersion}`;
 				}
 			}
 		}
