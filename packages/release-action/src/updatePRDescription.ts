@@ -27,10 +27,19 @@ export async function updatePRDescription({
 	// get version from main package
 	const { version: newVersion } = await readPackageJson(mainPackagePath);
 
+	console.log('newVersion ->', newVersion);
+
 	const mainPackageChangelog = path.join(mainPackagePath, 'CHANGELOG.md');
 
+	console.log('mainPackageChangelog ->', mainPackageChangelog);
+
 	const changelogContents = fs.readFileSync(mainPackageChangelog, 'utf8');
+
+	console.log('changelogContents ->', changelogContents);
+
 	const changelogEntry = getChangelogEntry(changelogContents, newVersion);
+
+	console.log('changelogEntry ->', changelogEntry);
 	if (!changelogEntry) {
 		// we can find a changelog but not the entry for this version
 		// if this is true, something has probably gone wrong
@@ -38,6 +47,8 @@ export async function updatePRDescription({
 	}
 
 	const releaseBody = (await getEngineVersionsMd(cwd)) + changelogEntry.content;
+
+	console.log('releaseBody ->', releaseBody);
 
 	core.info('get PR description');
 	const result = await octokit.rest.pulls.get({
