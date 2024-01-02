@@ -59,7 +59,7 @@ export async function updatePRDescription({
 
 	console.log('result.data.body ->', result.data.body);
 
-	const oldBody = result.data.body?.replace(/<!\-\- release\-notes\-start \-\->.*<!\-\- release\-notes\-end \-\->/m, '').trim();
+	const oldBody = result.data.body?.replace(/<!-- release-notes-start -->.*<!-- release-notes-end -->/s, '').trim();
 
 	console.log('oldBody ->', oldBody);
 
