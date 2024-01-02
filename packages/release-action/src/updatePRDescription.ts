@@ -44,13 +44,32 @@ export async function updatePRDescription({
 		...github.context.repo,
 	});
 
-	const oldBody = result.data.body?.replace(/<!-- release-notes-start -->(.|\n)*<!-- release-notes-end -->/, '').trim();
+	const { body: originalBody = '' } = result.data;
+
+	const cleanBody = originalBody?.replace(/<!-- release-notes-start -->.*<!-- release-notes-end -->/s, '').trim() || '';
+
+	const bodyUpdated = `${cleanBody}
+
+<!-- release-notes-start -->
+<!-- This content is automatically generated. Changing this will not reflect on the final release log -->
+
+_You can see below a preview of the release change log:_
+
+# ${newVersion}
+
+${releaseBody}
+<!-- release-notes-end -->`;
+
+	if (bodyUpdated == originalBody) {
+		core.info('no changes to PR description');
+		return;
+	}
 
 	core.info('update PR description');
 	await octokit.rest.pulls.update({
 		owner: github.context.repo.owner,
 		repo: github.context.repo.repo,
 		pull_number: github.context.issue.number,
-		body: `${oldBody}\n\n<!-- release-notes-start -->\n# ${newVersion}\n\n${releaseBody}\n<!-- release-notes-end -->`,
+		body: bodyUpdated,
 	});
 }

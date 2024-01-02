@@ -3,28 +3,28 @@ name: 'Release PR Description'
 on:
   pull_request:
     branches:
-      - release-*
+      - develop
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   update-pr:
     runs-on: ubuntu-latest
+    if: startsWith(github.head_ref, 'release-')
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.CI_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup NodeJS
-        uses: ./.github/actions/setup-node
+      - name: Setup Node.js 16
+        uses: actions/setup-node@v3
         with:
-          node-version: 14.21.3
-          cache-modules: true
-          install: true
+          node-version: 16
 
-      - uses: dtinth/setup-github-actions-caching-for-turbo@v1
+      - name: Install Dependencies
+        run: yarn
 
       - name: Build packages
         run: yarn build
@@ -34,5 +34,5 @@ jobs:
         with:
           action: update-pr-description
         env:
-          GITHUB_TOKEN: ${{ secrets.CI_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
