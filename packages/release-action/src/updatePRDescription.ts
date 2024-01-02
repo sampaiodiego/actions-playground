@@ -57,7 +57,11 @@ export async function updatePRDescription({
 		...github.context.repo,
 	});
 
+	console.log('result.data.body ->', result.data.body);
+
 	const oldBody = result.data.body?.replace(/<!-- release-notes-start -->(.|\n)*<!-- release-notes-end -->/, '').trim();
+
+	console.log('oldBody ->', oldBody);
 
 	core.info('update PR description');
 	await octokit.rest.pulls.update({
