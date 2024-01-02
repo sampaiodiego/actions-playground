@@ -36,7 +36,7 @@ import { updatePRDescription } from './updatePRDescription';
 	const cwd = process.cwd();
 
 	// TODO this could be configurable
-	const mainPackagePath = path.join(cwd, 'apps', 'meteor');
+	const mainPackagePath = path.join(cwd, 'apps', 'backend');
 
 	if (action === 'publish-final') {
 		await publishRelease({ githubToken, mergeFinal: true, mainPackagePath });
