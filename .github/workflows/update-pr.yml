@@ -19,7 +19,8 @@ jobs:
         with:
           node-version: 16
 
-      - uses: dtinth/setup-github-actions-caching-for-turbo@v1
+      - name: Install Dependencies
+        run: yarn
 
       - name: Build packages
         run: yarn build
