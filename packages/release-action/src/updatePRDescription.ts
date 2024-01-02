@@ -48,7 +48,7 @@ export async function updatePRDescription({
 
 	const releaseBody = (await getEngineVersionsMd(cwd)) + changelogEntry.content;
 
-	console.log('releaseBody ->', releaseBody);
+	// console.log('releaseBody ->', releaseBody);
 
 	core.info('get PR description');
 	const result = await octokit.rest.pulls.get({
@@ -59,7 +59,7 @@ export async function updatePRDescription({
 
 	console.log('result.data.body ->', result.data.body);
 
-	const oldBody = result.data.body?.replace(/<!-- release-notes-start -->(.|\n)*<!-- release-notes-end -->/, '').trim();
+	const oldBody = result.data.body?.replace(/<!-- release-notes-start -->(.|\n)*<!-- release-notes-end -->/m, '').trim();
 
 	console.log('oldBody ->', oldBody);
 
