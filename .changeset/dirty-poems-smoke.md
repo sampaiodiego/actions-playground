@@ -2,4 +2,4 @@
 "@diegosampaio/backend": patch
 ---
 
-and another one
+and another one - now updated
