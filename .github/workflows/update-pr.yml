@@ -1,12 +1,9 @@
 name: 'Release PR Description'
 
 on:
-  pull_request_target:
-    types:
-      - opened
-      - synchronize
+  pull_request:
     branches:
-      - 'release\-**'
+      - release-*
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
