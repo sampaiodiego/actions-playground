@@ -1,17 +1,13 @@
-name: Cut Final Release
-description: Cut Final Release of packages
+name: Changeset release
+description: Action to cut and publish releases using changesets
 
 inputs:
   action:
-    description: "The main action to perform: cut, bump, or both"
+    description: "The main action to perform: publish, publish-final, bump or patch"
     required: true
   base-ref:
     description: "Base ref to use for the release"
     required: false
-
-# outputs:
-#   image-name:
-#     value: ${{ steps.build-image.outputs.image-name }}
 
 runs:
   using: "node16"

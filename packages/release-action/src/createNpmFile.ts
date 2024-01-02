@@ -14,23 +14,13 @@ export async function createNpmFile() {
 			return /^\s*\/\/registry\.npmjs\.org\/:[_-]authToken=/i.test(line);
 		});
 		if (authLine) {
-			core.info(
-				'Found existing auth token for the npm registry in the user .npmrc file'
-			);
+			core.info('Found existing auth token for the npm registry in the user .npmrc file');
 		} else {
-			core.info(
-				"Didn't find existing auth token for the npm registry in the user .npmrc file, creating one"
-			);
-			fs.appendFileSync(
-				userNpmrcPath,
-				`\n//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}\n`
-			);
+			core.info("Didn't find existing auth token for the npm registry in the user .npmrc file, creating one");
+			fs.appendFileSync(userNpmrcPath, `\n//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}\n`);
 		}
 	} else {
 		core.info('No user .npmrc file found, creating one');
-		fs.writeFileSync(
-			userNpmrcPath,
-			`//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}\n`
-		);
+		fs.writeFileSync(userNpmrcPath, `//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}\n`);
 	}
 }
