@@ -27,15 +27,15 @@ export async function updatePRDescription({
 	// get version from main package
 	const { version: newVersion } = await readPackageJson(mainPackagePath);
 
-	console.log('newVersion ->', newVersion);
+	// console.log('newVersion ->', newVersion);
 
 	const mainPackageChangelog = path.join(mainPackagePath, 'CHANGELOG.md');
 
-	console.log('mainPackageChangelog ->', mainPackageChangelog);
+	// console.log('mainPackageChangelog ->', mainPackageChangelog);
 
 	const changelogContents = fs.readFileSync(mainPackageChangelog, 'utf8');
 
-	console.log('changelogContents ->', changelogContents);
+	// console.log('changelogContents ->', changelogContents);
 
 	const changelogEntry = getChangelogEntry(changelogContents, newVersion);
 
