@@ -4,6 +4,17 @@
 
 ### Minor Changes
 
+- 39aa190: bad now pls
+
+### Patch Changes
+
+- @diegosampaio/backend@3.2.0
+- @diegosampaio/theme@3.2.0
+
+## 3.2.0
+
+### Minor Changes
+
 - a92daeb: bump error
 
 ### Patch Changes
