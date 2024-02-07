@@ -1,5 +1,11 @@
 # @chinello-playground/backend
 
+## 3.1.0
+
+### Minor Changes
+
+- 2e3edf8: push
+
 ## 3.0.3
 
 ## 3.0.3-rc.0

@@ -1,5 +1,7 @@
 # @diegosampaio/theme
 
+## 3.1.0
+
 ## 3.0.3
 
 ## 3.0.3-rc.0

@@ -1,5 +1,0 @@
----
-"@diegosampaio/backend": minor
----
-
-push
