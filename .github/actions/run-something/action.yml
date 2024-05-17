@@ -10,6 +10,10 @@ inputs:
     type: string
   publish:
     required: false
+  username:
+    required: false
+  password:
+    required: false
 
 runs:
   using: "composite"
@@ -24,8 +28,16 @@ runs:
         echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
         echo "github.event_name: ${{ github.event_name }}"
         cat $GITHUB_EVENT_PATH
-        echo "full_name: github.event.pull_request.head.repo.full_name"
+        echo "full_name: ${{ github.event.pull_request.head.repo.full_name }}"
         echo "github.repository: ${{ github.repository }}"
+
+    - name: Login to GitHub Container Registry
+      if: github.event.pull_request.head.repo.full_name == github.repository
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ inputs.username }}
+        password: ${{ inputs.password }}
 
     - shell: bash
       run: |
@@ -35,7 +47,8 @@ runs:
 
         cat /tmp/feito
 
-    - run: |
+    - id: build-image
+      run: |
         LOWERCASE_REPOSITORY=$(echo "${{ github.repository_owner }}" | tr "[:upper:]" "[:lower:]")
 
         IMAGE_TAG="pr-${{ github.event.number }}"
@@ -45,17 +58,37 @@ runs:
 
         echo "IMAGE_NAME: ${IMAGE_NAME}"
 
+        echo "::set-output name=image-name::${IMAGE_NAME}"
+
         sleep 10
 
         echo "done"
       shell: bash
 
     - shell: bash
+      if: ${{ inputs.publish }}
       run: |
         echo "GOING TO PUSH THOSE IMAGES >${{ inputs.publish }}<"
 
     - shell: bash
-      if: github.event.pull_request.head.repo.full_name == github.repository && (github.event_name == 'release' || github.ref == 'refs/heads/develop')
+      if: github.event.pull_request.head.repo.full_name == github.repository
+      run: |
+        echo "IS THIS A PR"
+
+    - shell: bash
+      if: github.event_name == 'release'
+      run: |
+        echo "THIS IS A RELEASE"
+
+    - shell: bash
+      if: github.ref == 'refs/heads/master'
+      run: |
+        echo "PUSH TO MASTER"
+
+    - shell: bash
+      if: github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'release' || github.ref == 'refs/heads/develop'
       run: |
         echo "Can make IF here as well"
+
+        echo "Image name is: ${{ steps.build-image.outputs.image-name }}"
 
