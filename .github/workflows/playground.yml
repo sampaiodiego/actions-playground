@@ -61,16 +61,17 @@ jobs:
 
         cat /proc/sys/fs/nr_open
 
-        # echo fs.nr_open=20000500 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+        echo fs.file-max=20000500 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+        echo fs.nr_open=20000500 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-        sudo sysctl -w fs.file-max="20000500"
-        sudo sysctl -w fs.nr_open="20000500"
+        # sudo sysctl -w fs.file-max="20000500"
+        # sudo sysctl -w fs.nr_open="20000500"
 
         sudo sysctl -p
 
-        cat /proc/sys/fs/nr_open
-
         ulimit -a
+
+        cat /proc/sys/fs/nr_open
 
         # echo 20000500 | sudo tee /proc/sys/fs/nr_open
         # sudo ulimit -n 20000500
