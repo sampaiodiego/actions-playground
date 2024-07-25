@@ -27,16 +27,6 @@ runs:
         echo "full_name: github.event.pull_request.head.repo.full_name"
         echo "github.repository: ${{ github.repository }}"
 
-    - name: Setup kernel limits
-      run: |
-        echo 20000500 > /proc/sys/fs/nr_open
-        ulimit -n 20000500
-
-        sysctl -w net.ipv4.ip_local_port_range="500   65535"
-        sysctl -w net.ipv4.tcp_mem="383865   511820   2303190"
-
-        echo 1 > /proc/sys/net/ipv4/tcp_tw_recycle
-
     - shell: bash
       run: |
         echo "Hello World"
