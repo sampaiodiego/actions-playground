@@ -66,6 +66,8 @@ jobs:
         sudo sysctl -w fs.file-max="20000500"
         sudo sysctl -w fs.nr_open="20000500"
 
+        sudo sysctl -p
+
         cat /proc/sys/fs/nr_open
 
         ulimit -a
