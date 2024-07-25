@@ -61,23 +61,16 @@ jobs:
 
         cat /proc/sys/fs/nr_open
 
-        echo fs.file-max=20000500 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-        echo fs.nr_open=20000500 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+        sudo sysctl -w net.ipv4.ip_local_port_range="500   65535"
+        sudo sysctl -w net.ipv4.tcp_mem="383865   511820   2303190"
 
-        # sudo sysctl -w fs.file-max="20000500"
-        # sudo sysctl -w fs.nr_open="20000500"
-
+        echo fs.file-max=20000500 | sudo tee -a /etc/sysctl.conf
+        echo fs.nr_open=20000500 | sudo tee -a /etc/sysctl.conf
         sudo sysctl -p
 
         ulimit -a
 
         cat /proc/sys/fs/nr_open
-
-        # echo 20000500 | sudo tee /proc/sys/fs/nr_open
-        # sudo ulimit -n 20000500
-
-        sudo sysctl -w net.ipv4.ip_local_port_range="500   65535"
-        sudo sysctl -w net.ipv4.tcp_mem="383865   511820   2303190"
 
         # echo 1 | tee /proc/sys/net/ipv4/tcp_tw_recycle
 
