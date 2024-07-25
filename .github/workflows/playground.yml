@@ -63,6 +63,7 @@ jobs:
 
         # echo fs.nr_open=20000500 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
+        sudo sysctl -w fs.file-max="20000500"
         sudo sysctl -w fs.nr_open="20000500"
 
         cat /proc/sys/fs/nr_open
@@ -75,7 +76,7 @@ jobs:
         sudo sysctl -w net.ipv4.ip_local_port_range="500   65535"
         sudo sysctl -w net.ipv4.tcp_mem="383865   511820   2303190"
 
-        echo 1 | tee /proc/sys/net/ipv4/tcp_tw_recycle
+        # echo 1 | tee /proc/sys/net/ipv4/tcp_tw_recycle
 
     - uses: actions/checkout@v2
     - name: Run a one-line script
