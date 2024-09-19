@@ -7,17 +7,21 @@ import * as github from '@actions/github';
 
 import { createNpmFile } from './createNpmFile';
 import { fixWorkspaceVersionsBeforePublish } from './fixWorkspaceVersionsBeforePublish';
-import { commitChanges, createBranch, createTag, pushNewBranch } from './gitUtils';
+import { checkoutBranch, commitChanges, createTag, getCurrentBranch, mergeBranch, pushChanges } from './gitUtils';
 import { setupOctokit } from './setupOctokit';
-import { getChangelogEntry, bumpFileVersions, readPackageJson, getEngineVersionsMd } from './utils';
+import { bumpFileVersions, createBumpFile, getChangelogEntry, getEngineVersionsMd, readPackageJson } from './utils';
 
-export async function bumpNextVersion({
+export async function publishRelease({
 	githubToken,
 	mainPackagePath,
+	mergeFinal = false,
+	baseRef,
 	cwd = process.cwd(),
 }: {
 	githubToken: string;
 	mainPackagePath: string;
+	baseRef?: string;
+	mergeFinal?: boolean;
 	cwd?: string;
 }) {
 	const octokit = setupOctokit(githubToken);
@@ -25,15 +29,35 @@ export async function bumpNextVersion({
 	// TODO do this only if publishing to npm
 	await createNpmFile();
 
-	// TODO need to check if there is any change to 'main package', if not, there is no need to enter rc
-	// and instead a normal release of the other packages should be done
+	if (baseRef) {
+		await checkoutBranch(baseRef);
+	}
 
 	const { version: currentVersion } = await readPackageJson(cwd);
 
-	// start release candidate
-	await exec('yarn', ['changeset', 'pre', 'enter', 'rc']);
+	if (mergeFinal) {
+		let preRelease = false;
+		try {
+			fs.accessSync(path.resolve(cwd, '.changeset', 'pre.json'));
 
-	// bump version of all packages to rc
+			preRelease = true;
+		} catch (e) {
+			// nothing to do, not a pre release
+		}
+
+		if (preRelease) {
+			// finish release candidate
+			await exec('yarn', ['changeset', 'pre', 'exit']);
+		}
+	}
+
+	const { name: mainPkgName } = await readPackageJson(mainPackagePath);
+
+	// by creating a changeset we make sure we'll always bump the version
+	core.info('create a changeset for main package');
+	await createBumpFile(cwd, mainPkgName);
+
+	// bump version of all packages
 	await exec('yarn', ['changeset', 'version']);
 
 	// get version from main package
@@ -49,20 +73,21 @@ export async function bumpNextVersion({
 		throw new Error('Could not find changelog entry for version newVersion');
 	}
 
-	const prBody = (await getEngineVersionsMd(cwd)) + changelogEntry.content;
+	const releaseBody = (await getEngineVersionsMd(cwd)) + changelogEntry.content;
 
-	const finalVersion = newVersion.split('-')[0];
-
-	const newBranch = `release-${finalVersion}`;
-
-	// update root package.json
 	core.info('update version in all files to new');
 	await bumpFileVersions(cwd, currentVersion, newVersion);
 
-	// TODO check if branch exists
-	await createBranch(newBranch);
+	await commitChanges(`Release ${newVersion}\n\n[no ci]`);
 
-	await commitChanges(`Release ${newVersion}`);
+	if (mergeFinal) {
+		// get current branch name
+		const branchName = await getCurrentBranch();
+
+		// merge release changes to master
+		await checkoutBranch('master');
+		await mergeBranch(branchName);
+	}
 
 	core.info('fix dependencies in workspace packages');
 	await fixWorkspaceVersionsBeforePublish();
@@ -71,28 +96,13 @@ export async function bumpNextVersion({
 
 	await createTag(newVersion);
 
-	await pushNewBranch(newBranch, true);
-
-	if (newVersion.includes('rc.0')) {
-		const finalPrTitle = `Release ${finalVersion}`;
-
-		core.info('creating pull request');
-		await octokit.rest.pulls.create({
-			base: 'master',
-			head: newBranch,
-			title: finalPrTitle,
-			body: prBody,
-			...github.context.repo,
-		});
-	} else {
-		core.info('no pull request created: release is not the first candidate');
-	}
+	await pushChanges();
 
 	core.info('create release');
 	await octokit.rest.repos.createRelease({
 		name: newVersion,
 		tag_name: newVersion,
-		body: prBody,
+		body: releaseBody,
 		prerelease: newVersion.includes('-'),
 		...github.context.repo,
 	});

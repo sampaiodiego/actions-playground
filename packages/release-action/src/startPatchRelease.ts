@@ -1,23 +1,28 @@
-import path from 'path';
-
-import semver from 'semver';
-import { exec } from '@actions/exec';
-import * as github from '@actions/github';
 import * as core from '@actions/core';
+import * as github from '@actions/github';
+import semver from 'semver';
 
+import { checkoutBranch, commitChanges, createBranch, pushNewBranch } from './gitUtils';
 import { setupOctokit } from './setupOctokit';
-import { updateVersionPackageJson } from './utils';
+import { createBumpFile, readPackageJson } from './utils';
 
-export async function startPatchRelease({ githubToken, baseRef, cwd = process.cwd() }: { baseRef: string; githubToken: string; cwd?: string }) {
+export async function startPatchRelease({
+	githubToken,
+	baseRef,
+	mainPackagePath,
+	cwd = process.cwd(),
+}: {
+	baseRef: string;
+	mainPackagePath: string;
+	githubToken: string;
+	cwd?: string;
+}) {
 	const octokit = setupOctokit(githubToken);
 
-	await exec('git', ['checkout', baseRef]);
-
-	const mainPackagePath = path.join(cwd, 'apps', 'backend');
+	await checkoutBranch(baseRef);
 
 	// get version from main package
-	const mainPackageJsonPath = path.join(mainPackagePath, 'package.json');
-	const { version } = require(mainPackageJsonPath);
+	const { version, name: mainPkgName } = await readPackageJson(mainPackagePath);
 
 	const newVersion = semver.inc(version, 'patch');
 	if (!newVersion) {
@@ -27,18 +32,15 @@ export async function startPatchRelease({ githubToken, baseRef, cwd = process.cw
 	const newBranch = `release-${newVersion}`;
 
 	// TODO check if branch exists
-	await exec('git', ['checkout', '-b', newBranch]);
+	await createBranch(newBranch);
 
-	updateVersionPackageJson(cwd, newVersion);
+	// by creating a changeset we make sure we'll always bump the version
+	core.info('create a changeset for main package');
+	await createBumpFile(cwd, mainPkgName);
 
-	await exec('git', ['add', '.']);
-	await exec('git', ['commit', '-m', newVersion]);
+	await commitChanges(`Bump ${newVersion}`);
 
-	await exec('git', [
-		'push',
-		'origin',
-		`HEAD:refs/heads/${newBranch}`,
-	]);
+	await pushNewBranch(newBranch);
 
 	// create a pull request only if the patch is for current version
 	if (baseRef === 'master') {
@@ -52,5 +54,7 @@ export async function startPatchRelease({ githubToken, baseRef, cwd = process.cw
 			body: '',
 			...github.context.repo,
 		});
+	} else {
+		core.info('no pull request created: patch is not for current version');
 	}
 }
