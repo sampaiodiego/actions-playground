@@ -1,7 +1,8 @@
 on:
   schedule:
-    - cron: '30 * * * *'
-    - cron: '40 * * * *'
+    - cron: '40 23 * * *'
+    - cron: '40 0 * * *'
+    - cron: '40 1 * * *'
 
 jobs:
   test_schedule:
@@ -21,6 +22,7 @@ jobs:
           echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
           echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
           echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
+          echo "github.event.schedule: ${{ github.event.schedule }}"
           echo "github.event_name: ${{ github.event_name }}"
           echo "github.ref: ${{ github.ref }}"
           echo "github.ref_name: ${{ github.ref_name }}"
