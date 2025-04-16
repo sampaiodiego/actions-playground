@@ -55,6 +55,25 @@ jobs:
         echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
         echo "github.event_name: ${{ github.event_name }}"
         cat $GITHUB_EVENT_PATH
+
+    - name: Setup kernel limits
+      run: |
+
+        cat /proc/sys/fs/nr_open
+
+        sudo sysctl -w net.ipv4.ip_local_port_range="500   65535"
+        sudo sysctl -w net.ipv4.tcp_mem="383865   511820   2303190"
+
+        echo fs.file-max=20000500 | sudo tee -a /etc/sysctl.conf
+        echo fs.nr_open=20000500 | sudo tee -a /etc/sysctl.conf
+        sudo sysctl -p
+
+        ulimit -a
+
+        cat /proc/sys/fs/nr_open
+
+        # echo 1 | tee /proc/sys/net/ipv4/tcp_tw_recycle
+
     - uses: actions/checkout@v2
     - name: Run a one-line script
       run: echo Hello, world!
