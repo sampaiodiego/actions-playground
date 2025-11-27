@@ -75,7 +75,7 @@ jobs:
 
     - name: Run on tag only maybe
       run: |
-        if [[ 'startsWith(github.ref, 'refs/tags/')' = 'true' ]]; then
+        if [[ '${{ startsWith(github.ref, 'refs/tags/') }}' = 'true' ]]; then
           echo "This run only happens on tags"
         else
           echo "Not a tag"
