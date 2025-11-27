@@ -38,9 +38,9 @@ jobs:
           echo "RELEASE: $RELEASE"
           echo "LATEST_RELEASE: $LATEST_RELEASE"
 
-          echo "::set-output name=docker-tag::${DOCKER_TAG}"
-          echo "::set-output name=release::${RELEASE}"
-          echo "::set-output name=latest-release::${LATEST_RELEASE}"
+          echo "docker-tag=${DOCKER_TAG}" >> $GITHUB_OUTPUT
+          echo "release=${RELEASE}" >> $GITHUB_OUTPUT
+          echo "latest-release=${LATEST_RELEASE}" >> $GITHUB_OUTPUT
 
   build:
 
@@ -57,6 +57,7 @@ jobs:
         echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
         echo "github.event_name: ${{ github.event_name }}"
         cat $GITHUB_EVENT_PATH
+        echo "github.ref: ${{ github.ref }}"
 
     - uses: actions/checkout@v2
     - name: Run a one-line script
