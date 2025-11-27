@@ -57,6 +57,7 @@ jobs:
         echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
         echo "github.event_name: ${{ github.event_name }}"
         cat $GITHUB_EVENT_PATH
+        echo "github.ref_name: ${{ github.ref_name }}"
         echo "github.ref: ${{ github.ref }}"
 
     - uses: actions/checkout@v6
