@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: '**'
   push:
+    tags:
+      - '*'
     branches:
       - master
 
@@ -55,6 +57,7 @@ jobs:
         echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
         echo "github.event_name: ${{ github.event_name }}"
         cat $GITHUB_EVENT_PATH
+
     - uses: actions/checkout@v2
     - name: Run a one-line script
       run: echo Hello, world!
