@@ -19,6 +19,11 @@
     "apps/*",
     "packages/*"
   ],
+	"engines": {
+		"yarn": "3.2.2",
+		"node": "14.21.3",
+		"npm": "Use yarn instead"
+	},
   "dependencies": {
     "@changesets/cli": "^2.26.1"
   },
